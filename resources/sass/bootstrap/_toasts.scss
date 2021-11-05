@@ -1,0 +1,105 @@
+.toast {
+  max-width: $toast-max-width;
+  overflow: hidden; // cheap rounded corners on nested items
+  @include font-size($toast-font-size);
+  color: $toast-color;
+  background-color: $toast-background-color;
+  background-clip: padding-box;
+  border: $toast-border-width solid $toast-border-color;
+  box-shadow: $toast-box-shadow;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  @include border-radius($toast-border-radius);
+
+  &:not(:last-child) {
+    margin-bottom: $toast-padding-x;
+  }
+
+  &.showing {
+    opacity: 1;
+  }
+
+  &.show {
+    display: block;
+    opacity: 1;
+  }
+
+  &.hide {
+    display: none;
+  }
+}
+
+.toast-header {
+  display: flex;
+  align-items: center;
+  padding: $toast-padding-y $toast-padding-x;
+  color: $toast-header-color;
+  background-color: $toast-header-background-color;
+  background-clip: padding-box;
+  border-bottom: $toast-border-width solid $toast-header-border-color;
+}
+
+.toast-body {
+  padding: $toast-padding-x; // apply to both vertical and horizontal
+}
+
+
+/**
+ * @author Script47 (https://github.com/Script47/Toast)
+ * @description Toast - A Bootstrap 4.2+ jQuery plugin for the toast component
+ * @version 1.1.0
+ **/
+.toast-container {
+    position: fixed;
+    z-index: 1055;
+    margin: 5px;
+
+  & > .toast {
+      background: transparent;
+      border: none;
+
+      .toast-header {
+          border: none;
+      }
+
+      .toast-header strong {
+          padding-right: 20px;
+      }
+
+      .toast-body {
+          background: white;
+      }
+  }
+}
+
+.top-right {
+    top: calc(70px + 1rem);
+    right: 1.75rem;
+}
+
+.top-left {
+    top: 0;
+    left: 0;
+}
+
+.top-center {
+    transform: translateX(-50%);
+    top: 0;
+    left: 50%;
+}
+
+.bottom-right {
+    right: 0;
+    bottom: 0;
+}
+
+.bottom-left {
+    left: 0;
+    bottom: 0;
+}
+
+.bottom-center {
+    transform: translateX(-50%);
+    bottom: 0;
+    left: 50%;
+}

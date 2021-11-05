@@ -1,0 +1,14 @@
+span {
+    &.has-icon {
+        color: map-get($blue, "passive");
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 10px;
+        padding: 0 10px;
+    }
+    &.in-header {
+        font-size: 14px;
+        line-height: 18px;
+    }
+}

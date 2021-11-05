@@ -1,0 +1,60 @@
+@use "sass:map";
+@use "sass:color";
+
+.progressbar-container {
+	width: 100%;
+	position: relative;
+
+	p:first-child{
+		font-size: 14px;
+		line-height: 18px;
+		letter-spacing: 0.014em;
+	}
+
+	p:last-child {
+		font-size: 16px;
+		line-height: 20px;
+		font-family: $font-family-monospace;
+	}
+
+	.progressbar-gradient {
+		position: absolute;
+		left: 35px;
+		top: 0;
+		bottom: 0;
+
+		background: linear-gradient(90deg, transparent 0%, color.adjust($primary, $alpha: -0.8) 100%);
+		border-right: 1px solid $primary;
+
+		&.progress-100 {
+			left: 0;
+			width: 100% !important;
+			border-right: none;
+		}
+		&.progress-0 {
+			left: 0;
+			width: 0 !important;
+			border-right: none;
+		}
+	}
+
+	.bar {
+		position: relative;
+		background-color: #FAFAFA;
+	    border-radius: 15px;
+	    overflow: hidden;
+		/* (height of inner div) / 2 + padding */
+		margin: auto 35px;
+		box-shadow: inset 0 0 0px 2px #fff, inset 0 0 0px 4px color.adjust($primary, $alpha: -0.8);
+
+		> div {
+			background: gradient-dark($color: $primary, $end: 100%);
+			background-color: $primary;
+			/* Adjust with JavaScript */
+			height: 10px;
+		}
+	}
+}
+
+
+

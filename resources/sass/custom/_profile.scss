@@ -1,0 +1,373 @@
+// profile page CSS
+@use "sass:map";
+
+.profile-container {
+	color: map.get($dark-blue, selected);
+}
+
+$profile-container-sizes:(
+	md: 624px,
+	lg: 877px,
+	xl: 856px
+);
+
+@mixin profile-width-resizes ($breakpoints: $grid-breakpoints) {
+	@each $size, $breakpoint in $breakpoints {
+		@if map.get($profile-container-sizes, $size) {
+			@include media-breakpoint-up($size){
+				.profile-container-top, .profile-container-bottom {
+					width: map.get($profile-container-sizes, $size);
+				}
+			}
+		}
+	}
+}
+
+@include profile-width-resizes;
+
+.subscription-div-omnifill {
+	background: url("/img/vector.png") left bottom no-repeat #fff;
+}
+
+.subscription-text {
+	font-weight: normal;
+	font-size: 22px;
+	line-height: 28px;
+}
+
+.subscription-logo {
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	text-align: center;
+	width: 141px;
+
+	&.subscription-logo-light {
+		background: #E1E1E1;
+		color: #0F0F0F;
+	}
+
+	&.subscription-logo-dark {
+		background: map.get($dark-blue, "passive");
+		color: #F7F7F7;
+	}
+}
+
+.brand-logo {
+	width: 140px;
+	height: 140px;
+	background: #007DC3;
+	border-radius: 50%;
+	position: absolute;
+	top: -70px;
+	left:0;
+	right:0;
+	bottom: 0px;
+
+	img {
+		width: 140px;
+		height: 140px;
+	}
+}
+
+.key-div svg {
+	transition: transform 0.25s;
+}
+
+.api-container, .key-container {
+	position: relative;
+	border-bottom: 1px solid;
+   .fa-placeholder {
+		position:absolute;
+		top: 15px;
+		right: 20px;
+   }
+}
+
+.key-container-icons {
+    background-color: $lighter;
+    max-height: $btn-lg-height;
+}
+
+.bg-gray {
+	background: linear-gradient(0deg, #EFEFEF, #EFEFEF),
+	linear-gradient(0deg, #FFFFFF, #FFFFFF);
+	background: $body-bg-dark;
+}
+
+.bg-light-blue-active {
+	background-color: $body-bg-dark;
+}
+
+.collapsible-container {
+	padding: 36px 30px;
+
+	.fa-placeholder {
+		color: #F25D25;
+	}
+
+	label, input {
+		font-weight: 400;
+		line-height: 20px;
+		font-style: normal;
+	}
+
+	label {
+		font-family: $font-family-sans-serif;
+		font-size: 14px;
+		letter-spacing: 0.016em;
+	}
+
+	input {
+		font-family: $font-family-monospace;
+		font-size: 16px;
+		height: 50px;
+		background: $lighter;
+		border: 0px;
+		border-radius: 0px;
+		padding: 15px 20px 14px 20px;
+	}
+
+	.fa-info-circle {
+		font-size: 18px;
+	}
+}
+
+.body-short-02 {
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 22px;
+}
+
+.top-border-light {
+	border-top: 1px solid $light;
+}
+
+.bottom-border-light {
+	border-bottom: 1px solid $light;
+}
+
+.left-border {
+	border-left: 4px solid;
+}
+
+.border-direct {
+	border-color: $direct;
+}
+
+.profile-container-top {
+	margin-top: 106px;
+	background-color: #FFFFFF;
+
+	.button-div {
+		margin-bottom: 34px;
+		margin-right: 20px;
+
+		button {
+			padding: 7px 18px 7px 18px;
+			border: 2px solid #404040;
+
+			span {
+				margin-right: 20px;
+			}
+		}
+	}
+
+	.title {
+		font-weight: 300;
+		font-size: 42px;
+		line-height: 50px;
+		font-style: normal;
+		padding: 2px 40px 2px 40px;
+	}
+
+	.email {
+		color: $dark;
+		margin-top: 5px;
+		margin-bottom: 24px;
+		padding-left:40px;
+		padding-right: 40px;
+	}
+
+	.role {
+		font-weight: 500;
+		font-size: 12px;
+		line-height: 16px;
+		color: #F25D25;
+	}
+
+	.user-info-div {
+		position: relative;
+		padding-top: 20px;
+		padding-bottom: 25px;
+	}
+
+	.key-div {
+		width: 100%;
+		div {
+			padding: 14px 0 14px 25px;
+		}
+		i {
+			color: #F25D25;
+            margin-top: 3px;
+		}
+	}
+
+	.subscription-div {
+		padding: 22px 30px 22px 26px;
+	
+		.profile-text-muted {
+			font-size: 16px;
+			line-height: 24px;
+			letter-spacing: 0.015em;
+			color: $body-text-light;
+		}
+
+		.subscription-logo {
+			padding-top: 16px;
+			padding-bottom: 16px;
+			margin-top: 4px;
+		}
+	}
+
+	.subscription-text {
+		color: #000000;
+		margin-bottom: 4px;
+	}
+	
+}
+
+.profile-container-middle {
+	font-size: 32px;
+	line-height: 40px;
+	padding-top: 60px;
+	padding-bottom: 42px;
+}
+
+.profile-container-bottom {
+	display: block;
+	padding-bottom: 50px; 
+
+	.channel:first-child {
+		margin-bottom: 20px;
+	} 
+	
+	.top {
+		padding-left: 20px;
+		padding-right: 20px;
+
+		.subscription-logo {
+			padding-top: 14px;
+			padding-bottom: 14px;
+			margin-top: 30px;
+			margin-bottom: 29px;
+		}
+
+		.subscription-text {
+			margin-top: 38px;
+			margin-bottom: 37px;
+			display: inline-block;
+		}
+	}
+
+	.middle-1 {
+		height: 164px;
+		padding-left: 40px;
+		padding-right: 42px;
+	}
+
+	.subtitle-text {
+		color: $dark;
+		font-size: 22px;
+		line-height: 46px;
+	}
+
+	.middle-2 {
+		padding-left: 20px;
+		padding-right: 22px;
+
+		> div {
+			transition: filter .15s;
+		}
+
+		.body-short-02 {
+			margin-top: 18px;
+			margin-bottom: 19px;
+			display: inline-block;
+		}
+	}
+
+	.option-item {
+		border-top: 1px solid $body-bg-dark;
+		padding-left: 20px;
+		padding-right: 20px;
+
+		i, svg {
+			margin-top: 21px;
+			margin-bottom: 22px;
+			transition: transform 0.25s;
+		}
+	}
+
+	.option-item:last-child {
+		border-bottom: 1px solid #EFEFEF;
+	}
+
+	.option-container {
+		filter: drop-shadow(0px 0px 15px rgba(64, 64, 64, 0.15));
+	}
+
+	.collapse-card {
+		border-top: 1px solid #EFEFEF;
+		padding: 23px 20px 24px 20px;
+		background-color: #F7F7F7;
+	}
+
+	.footer { 
+		padding: 160px 22px 40px 20px;
+		display: flex;
+
+		button {
+			line-height: 22px;
+			padding-top: 8px;
+			padding-bottom: 8px;
+			width: 178px;
+			margin-left: 20px;
+		}
+
+        span {
+            max-width: 170px;
+        }
+
+		.footer-text {
+			font-weight: normal;
+			font-size: 14px;
+			line-height: 20px;
+			letter-spacing: 0.016em;
+			flex: 1;
+		}
+	}
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)){
+	.profile-container-bottom {
+		display: flex;
+	
+		.channel {
+			flex: 1;
+		}  
+		
+		.channel:first-child {
+			margin-right: 20px;
+			margin-bottom: 0px;
+		} 
+	}
+}
+
+.subscription-div-omnifill {
+	background: url("/img/vector.png") left bottom no-repeat #fff;
+}
+
+.subscription-div-global {
+	background: url("/img/vector-2.png") left bottom no-repeat #fff;
+}

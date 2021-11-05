@@ -1,0 +1,115 @@
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+table.rounded {
+	thead:first-child th,
+	tbody:first-child td {
+		border-top: none;
+	}
+	thead:first-child th:first-child,
+	tbody:first-child td:first-child {
+		border-top-left-radius: 5px;
+	}
+	thead:first-child th:last-child,
+	tbody:first-child td:last-child {
+		border-top-right-radius: 5px;
+	}
+	tbody:first-child td:last-child,
+	tfoot:first-child td:last-child {
+		border-bottom-right-radius: 5px;
+	}
+	tbody:first-child td:first-child,
+	tfoot:first-child td:first-child {
+		border-bottom-left-radius: 5px;
+	}
+}
+
+table.table-numbered:not(.js-table-sections),
+.table-numbered table.dx-datagrid-table {
+	counter-reset: table-numbers;
+
+	tbody tr:not(.dx-datagrid-filter-row) {
+		counter-increment: table-numbers;
+
+		td:first-child {
+			position: relative;
+		}
+		td:first-child::before {
+			content: counter(table-numbers);
+			position: absolute;
+			left: 0;
+			top: calc(50% - 8px);
+
+			width: 20px;
+			text-align: center;
+			line-height: 16px;
+			font-size: 9px;
+			font-family: $font-family-monospace;
+			font-weight: 500;
+
+			background: $body-bg-dark;
+			color: $dark;
+			border-radius: 0 5px 5px 0;
+		}
+	}
+
+}
+.table-numbered table.dx-datagrid-table {
+	td:nth-child(1) { border-right: none !important; }
+	// td:nth-child(2) { border-left: none !important; }
+
+
+	.dx-datagrid-table td:nth-child(1) { border-right: 1px solid var(--color-body-bg-dark) !important; }
+	.dx-datagrid-table td:nth-child(2) { border-left: 1px solid var(--color-body-bg-dark) !important; }
+}
+.table-numbered table.dx-datagrid-table tbody tr:not(.dx-datagrid-filter-row) td:first-child::before {
+	content: attr(data-rowindex);
+}
+
+table.table-numbered.js-table-sections {
+	counter-reset: table-numbers;
+
+	tbody.js-table-sections-header tr {
+		counter-increment: table-numbers;
+
+		td:first-child {
+			position: relative;
+		}
+		td:first-child::before {
+			content: counter(table-numbers);
+			position: absolute;
+			left: 0;
+			top: calc(50% - 8px);
+
+			width: 20px;
+			text-align: center;
+			font-size: 12px;
+			line-height: 16px;
+			font-weight: 500;
+
+			background: $body-bg-dark;
+			color: $dark;
+			border-radius: 0 5px 5px 0;
+		}
+	}
+
+}
+
+.dx-header-row td:not(:first-of-type):not(:nth-child(2)),
+.dx-datagrid .dx-datagrid .dx-header-row td:not(:first-of-type) {
+	position: relative;
+	overflow: visible;
+
+	&::before {
+		position: absolute;
+		content: '';
+		border-top: 4px solid #909090;
+		border-left: 2px solid transparent;
+		border-right: 2px solid transparent;
+		left: 0;
+		top: 0;
+		transform: translateX(-2.5px)
+	}
+}

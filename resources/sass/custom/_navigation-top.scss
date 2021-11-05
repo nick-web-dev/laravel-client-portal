@@ -1,0 +1,136 @@
+@use "sass:map";
+@use "sass:color";
+
+#page-container {
+	&.page-header-fixed #page-header {
+		box-shadow: none;
+	}
+	#page-header {
+		border-bottom: 1px solid #D4DCE9;
+
+		.content-header {
+			padding-left: $space-block;
+			padding-right: 0;
+		}
+	}
+}
+
+header {
+	max-height: $header-height;
+}
+
+nav.nav {
+	display: flex;
+	align-self: stretch;
+	align-items: stretch;
+	max-height: $header-height;
+
+	> *:not(.dropdown-menu),
+	> div > a,
+	> div > button,
+	> .dropdown > a,
+	> .dropdown > button {
+		display: flex !important;
+		height: 100%;
+		align-items: center;
+        justify-content: center;
+        align-self: stretch;
+	}
+
+	> a {
+		padding: 20px !important;
+	}
+
+	> a,
+	> button,
+	> div > a,
+	> div > button,
+	> .dropdown > a,
+	> .dropdown > button {
+		color: $dark;
+		border-top: 2px solid transparent;
+		border-bottom: 2px solid transparent;
+        border-right-width: 0px;
+        border-left-width: 0px;
+
+		&:hover,
+		&.hover {
+			background: color.adjust(map.get($blue, passive), $alpha: -0.9) !important;
+		}
+
+		&:focus,
+		&:active,
+		&.active {
+			box-shadow: none;
+			background: color.adjust(map.get($blue, passive), $alpha: -0.8) !important;
+		}
+
+		&.selected,
+		&[aria-selected="true"],
+		&[aria-expanded="true"] {
+			background: color.adjust(map.get($blue, passive), $alpha: -0.9) !important;
+			border-bottom: 2px solid $primary !important;
+		}
+	}
+
+	.btn .fa {
+		top: 0;
+	}
+
+	.dropdown-menu,
+	.dropdown-item {
+		border-radius: 0; 
+	}
+
+	.dropdown-menu {
+		min-width: 269px;
+	}
+	.dropdown-menu .dropdown-item {
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+		justify-content: center;
+
+		height: 64px;
+		font-size: 16px;
+		padding: 22px 20px;
+		line-height: 22px;
+		font-weight: 500;
+		margin-bottom: 0;
+	}
+
+	&.section-nav {
+		height: $header-height;
+		padding-left: 30px;
+
+		justify-content: space-between;
+		align-items: center;
+
+		background: #fff;
+		border-bottom: 1px solid $passive-light;
+
+		h1 {
+			font-weight: 400;
+			font-size: 28px;
+			margin: 0;
+		}
+
+		.btn {
+			padding: 0 $space-block;
+			font-weight: 400;
+		}
+	}
+}
+
+header #nav-tab {
+	> a {
+		height: 64px;
+		width: 64px;
+		border-radius: 0px;
+	}
+}
+
+#page-header-user-dropdown:hover + .dropdown-menu,
+#page-header-user-dropdown + .dropdown-menu:hover {
+	display: block;
+}

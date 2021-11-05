@@ -1,0 +1,50 @@
+.processing-spinner {
+    position: relative;
+    width: 216px;
+    height: 216px;
+    padding-bottom: 81px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: content-box;
+
+    background: $white;
+    border-radius: 216px 216px 0 0;
+
+    .value {
+        color: $dark;
+        font-family: $font-family-monospace;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 34px;
+    }
+    .text {
+        color: $body-text-light;
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    &::before {
+        content: '';
+
+        position: absolute;
+        top: 108px;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(0);
+
+        width: 204px;
+        height: 204px;
+        -webkit-mask-image: url('/img/processing-spinner.svg');
+        -webkit-mask-position: center center;
+        background: conic-gradient($primary, $light, $primary);
+        animation: 2s process-spin infinite steps(32);
+    }
+}
+
+@keyframes process-spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

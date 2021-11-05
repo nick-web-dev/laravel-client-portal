@@ -1,0 +1,284 @@
+//
+// Custom Variables
+//
+// Here you can add your own variables overrides
+//
+// The file is included before any other variable file,
+// so you can override them because they all use !default
+// --------------------------------------------------
+
+// For example, changing the primary color
+// $primary: #3b5998;
+@use "sass:map";
+@use "sass:color";
+ 
+
+// Layout
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 667px,
+	md: 768px,
+	lg: 1024px,
+	xl: 1440px
+);
+
+$container-max-widths: (
+	sm: 607px,
+	md: 688px,
+	lg: 944px,
+	xl: 1360px
+);
+
+$container-max-widths-sidebar: (
+	sm: 447px,
+	md: 528px,
+	lg: 784px,
+	xl: 1152px
+);
+
+$container-max-widths-sidebar-mini: (
+	sm: 543px,
+	md: 624px,
+	lg: 880px,
+	xl: 1296px
+);
+
+// $space-main-max-width: 1360px;
+$sidebar-width: 208px;
+$sidebar-width-sm: 160px;
+
+$grid-gutter-width: 24px;
+$header-height: 64px;
+$footer-height: 64px;
+$space-base: 40px;
+$space-mobile: 40px;
+$space-block: 20px;
+$space-block-top: 12px;
+
+$block-header-height: 60px;
+$block-footer-height: 60px;
+
+$spacers: (
+	1: 2px,
+	2: 4px,
+	3: 8px,
+	4: 12px,
+	5: 16px,
+	6: 24px,
+	7: 30px,
+	8: 40px,
+	9: 48px,
+	10: 60px,
+	20: 120px,
+	'base': $space-base,
+	'block': $space-block,
+);
+
+// Fonts
+$font-family-sans-serif: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace: "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+$h1-font-size:	54px;
+$h2-font-size:	42px;
+$h3-font-size:	32px;
+$h4-font-size:	28px;
+$h5-font-size:	20px;
+$h6-font-size:	16px;
+
+$display1-size: 54px;
+$display2-size: 42px;
+$display3-size: 32px;
+$display4-size: 28px;
+
+$headings-font-weight:	300;
+$font-weight-bold:	500;
+
+$nav-link-font-size: 16px;
+
+$block-title-font-size: 18px;
+$block-title-line-height: 24px;
+
+$paragraph-line-height:     1.25em;
+$paragraph-line-height-lg:  1.5em;
+
+// Shadows
+$box-shadow-sm:	0 0 16px rgba(64, 64, 64, 0.16);
+$box-shadow:	0 0 32px rgba(64, 64, 64, 0.16);
+$box-shadow-lg:	0 0 46px rgba(64, 64, 64, 0.16);
+$input-btn-focus-box-shadow: none;
+
+// Colors
+$yellow: (
+	"passive": #FFC700,
+	"hover": #F5C001,
+	"active": #EDB903,
+	"selected": #DDAD00,
+);
+
+$orange: (
+	"passive": #FF7A00,
+	"hover": #FF5C00,
+	"active": #D84E00,
+	"selected": #CC4A00,
+);
+
+$red: (
+	"passive": #FF0000,
+	"hover": #D20000,
+	"active": #C90000,
+	"selected": #BC0000,
+);
+
+$green: (
+	"passive": #06D7A6,
+	"hover": #05C094,
+	"active": #06B68C,
+	"selected": #05A881,
+);
+
+$blue: (
+	"passive": #0084FF,
+	"hover": #0153B3,
+	"active": #004CA6,
+	"selected": #00418D,
+);
+
+$dark-blue: (
+	"passive": #001D61,
+	"hover": #052058,
+	"active": #0A224C,
+	"selected": #10253E,
+);
+
+$brand-colors: (
+	"yellow": $yellow,
+	"orange": $orange,
+	"red": $red,
+	"green": $green,
+	"blue": $blue,
+	"dark-blue": $dark-blue
+);
+
+// $yellow: #FFC700;
+// $orange: #FF7A00;
+// $red: #FF0000;
+// $green: #06D7A6;
+// $blue: #0084FF;
+// $dark-blue: #001D61;
+
+$slate: #404040;
+$direct: #FF4700;
+$fullfillment: #00446A;
+$ecommerce: #00718F;
+$callcenter: #0072C6;
+$golden: #FCB034;
+$ice: #50C8E8;
+$wheat: #FFE19B;
+$heather: #629080;
+$med-grey: #B6B6B6;
+
+$default: map.get($dark-blue, passive);
+$primary: map.get($blue, passive);
+$secondary: $fullfillment;
+$success: map.get($green, passive);
+$info: $primary;
+$warning: map.get($yellow, passive);
+$danger: map.get($red, passive);
+$dark: map.get($dark-blue, passive);
+// $blue: $fullfillment;
+$light: #F6F7FA;
+$lighter: #FAFCFF;
+$passive-light: #e1e1e1;
+$white: #fff;
+$body-bg-dark: #D4DCE9;
+$body-text-light: #8F9AB3;
+$body-text-dark: #515E7C;
+
+$theme-colors: (
+	"primary":		$primary,
+	"secondary":	$secondary,
+	"success":		$success,
+	"info":			$info,
+	"warning":		$warning,
+	"danger":		$danger,
+	"light":		$light,
+	"lighter":		$lighter,
+	"passive-light":$passive-light,
+	"dark":			$dark,
+
+	"slate": 	  	$slate,
+	"direct": 		$direct,
+	"fullfillment": $fullfillment,
+	"ecommerce": 	$ecommerce,
+	"callcenter": 	$callcenter,
+	"golden": 		$golden,
+	"ice": 			$ice,
+	"wheat": 		$wheat,
+	"heather": 		$heather,
+	"med-grey": 	$med-grey,
+	"body-bg-dark":	$body-bg-dark,
+	"body-text-light":	$body-text-light,
+	"body-text-dark":	$body-text-dark
+);
+
+// Body
+$body-bg: $light;
+$text-muted: $body-text-light;
+
+$headings-color: $dark;
+
+// Main nav colors
+$main-nav-link-default: map.get($dark-blue, passive);
+$main-nav-link-hover: map.get($dark-blue, hover);
+$main-nav-link-active: map.get($dark-blue, active); // CSS :active not class .active
+$main-nav-link-selected: map.get($dark-blue, selected); // this is class .active
+
+$border-color: $body-bg-dark;
+$border-radius: 5px;
+
+// Btn sm, height: 34px
+$btn-sm-height: 		34px;
+$btn-padding-x-sm:      20px;
+$btn-padding-y-sm:      8px;
+$btn-font-size-sm:      14px;
+$btn-line-height-sm:    18px;
+
+// Btn, height: 40px
+$btn-height: 			40px;
+$btn-padding-x:         20px;
+$btn-padding-y:         9px;
+$btn-font-size:         16px;
+$btn-line-height:       22px;
+
+// Btn lg, height: 50px
+$btn-lg-height: 		50px;
+$btn-padding-x-lg:      20px;
+$btn-padding-y-lg:      14px;
+$btn-font-size-lg:      16px;
+$btn-line-height-lg:    22px;
+
+// Btn xl, height: 64px
+$btn-xl-height: 		64px;
+$btn-padding-x-xl:		20px;
+$btn-padding-y-xl:		21px;
+$btn-font-size-xl:		16px;
+$btn-line-height-xl:	22px;
+$btn-border-radius-xl:	0;
+
+$btn-disabled-opacity: 0.15;
+$btn-font-weight:	500;
+$btn-border-radius: 0;
+$btn-border-radius-lg: 0;
+$btn-border-radius-sm: 0;
+
+// Tables
+$table-cell-padding: 16px;
+
+// Modals
+$modal-sm: 416px;
+$modal-content-border-width: 0;
+$modal-backdrop-bg: color.adjust(map.get($dark-blue, selected), $alpha: -0.2);
+
+// Toasts
+$toast-min-width: 230px;

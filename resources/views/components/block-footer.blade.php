@@ -1,0 +1,1 @@
+<div {{ $attributes->merge(['class' => 'block-footer bg-lighter']) }}>{{ $slot }}</div>

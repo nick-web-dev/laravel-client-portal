@@ -1,0 +1,18 @@
+@use "sass:map";
+@use "sass:color";
+
+:root {
+	--color-muted: #{$text-muted};
+	@each $name, $color in $theme-colors {
+		--color-#{$name}: #{$color};
+	}
+	@each $name, $set in $brand-colors {
+		--color-#{$name}: #{map.get($set, passive)};
+		--color-gd-#{$name}: #{gradient-dark($color: map.get($set, passive))};
+		--color-#{$name}-10: #{color.adjust($color: map.get($set, passive), $alpha: -0.9)};
+		--color-#{$name}-20: #{color.adjust($color: map.get($set, passive), $alpha: -0.8)};
+		@each $variant, $color in $set {
+			--color-#{$name}-#{$variant}: #{$color};
+		}
+	}
+}

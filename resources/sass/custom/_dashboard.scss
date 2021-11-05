@@ -1,0 +1,115 @@
+figure.digit-display {
+    font-style: normal;
+    font-size: 36px;
+    line-height: 46px;
+    font-weight: 500;
+    color: $dark;
+    font-family: $font-family-monospace;
+    margin-bottom: 0;
+}
+
+figcaption {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    font-family: $font-family-sans-serif;
+    color: $text-muted;
+
+    .digit-display & {
+        // margin-top: -4px;
+    }
+    .item + & {
+        margin-top: 8px;
+    }
+}
+
+.font-size-xs {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: $slate;
+}
+
+.fs-text-md{
+    font-size: 20px;
+    line-height: 32px;
+    font-family: $font-family-monospace;
+}
+
+.orders-block {
+    align-items: center;
+
+    > .vertical-divider{
+        // margin-top: 9px; 
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+}
+
+
+// .orders-block>div:last-child{
+//     padding-top: 6px; 
+// }
+
+.dashboard {
+    .block {
+        height: 100%;
+        margin-bottom: 0;
+
+        box-shadow: 0px 0px 15px rgba(64, 64, 64, 0);
+
+        transition: all 0.25s;
+
+        &:hover {
+            box-shadow: 0px 0px 15px rgba(64, 64, 64, 0.15);
+        }
+    }
+
+    .announcement-widget .block-content {
+        // max-height: 240px;
+    }
+
+    .block-header {
+        height: 55px;
+    }
+
+    .block-content-lower {
+        padding-top: 26px;
+        padding-bottom: 16px;
+    }
+
+    .block-content-upper {
+        padding-top: 42px;
+        padding-bottom: $space-block;
+    }
+
+    .progressbar-container {
+        padding-top: 14px;
+        padding-bottom: 16px;
+    } 
+
+    .d-flex:not(.orders-block) .vertical-divider {
+        margin-top: 8px;
+    }
+
+    figure {
+        margin: 0;
+    }
+
+    .item {
+        margin: auto;
+        height: 36px;
+        width: 36px;
+    }
+
+    .line {
+        flex-grow: 1;
+        border-top: 2px solid $body-bg-dark;
+        margin: 22px 4px 0;
+    }
+    .separator {
+        margin: -26px -1px -16px;
+        width: 1px;
+        background: $body-bg-dark;
+    }
+}

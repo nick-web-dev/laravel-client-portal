@@ -1,0 +1,61 @@
+.legend {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 18px;
+
+    .legend-dot {
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        border-radius: 100%;
+        border: 5px solid var(--color-blue-10);
+        transition: all 0.25s linear;
+        background-clip: padding-box;
+    }
+    &.selected .legend-dot {
+        border-color:  var(--color-dark-blue);
+    }
+
+    span {
+        margin-top: 2px;
+    }
+}
+.dxc-tooltip {
+    z-index: 5;
+    > * {
+        transform: translateY(-3px);
+    }
+}
+
+g.dxc-arg-line path:nth-child(2) {
+    display: none;
+}
+
+.tip-point {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 115px;
+    height: 22px;
+    margin-left: -1px;
+    padding: 0 4px;
+    border-left: 4px solid;
+
+    .series-name {
+        font-family: $font-family-base;
+        font-size: 12px;
+        flex-grow: 1;
+    }
+    .value {
+        font-family: $font-family-monospace;
+        font-size: 10px;
+        font-weight: 500;
+        margin-left: 8px;
+    }
+    .series-name, .value {
+        line-height: 16px;
+    }
+
+}

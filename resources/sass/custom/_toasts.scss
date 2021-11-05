@@ -1,0 +1,23 @@
+.toast-container {
+	> .toast {
+		min-width: 416px;
+		padding: 16px 20px;
+		background-color: #fff;
+		border-radius: 0;
+		box-shadow: 0px 0px 15px rgba(64, 64, 64, 0.1);
+
+		.toast-header {
+			font-size: 14px;
+			line-height: 18px;
+			font-weight: 400;
+			padding: 0 0 6px 0;
+
+			color: $slate;
+		}
+		.toast-header strong {
+		}
+		.toast-body {
+			padding: 0;
+		}
+	}
+}

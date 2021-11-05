@@ -1,0 +1,69 @@
+@use "sass:map";
+
+@each $label, $width in $grid-breakpoints {
+	@include media-breakpoint-up ($label) {
+		#main-container {
+			.content.content-boxed {
+				max-width: map.get($container-max-widths, $label);
+				padding-top: 48px;
+				padding-left: 0;
+				padding-right: 0;
+
+				.sidebar-o & {
+					max-width: map.get($container-max-widths-sidebar, $label);
+				}
+
+				.sidebar-mini & {
+					max-width: map.get($container-max-widths-sidebar-mini, $label);
+				}
+			}
+
+			.container {
+				padding: 0;
+
+				.sidebar-o & {
+					max-width: map.get($container-max-widths-sidebar, $label);
+				}
+
+				.sidebar-mini & {
+					max-width: map.get($container-max-widths-sidebar-mini, $label);
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1550px){
+	#main-container .container,
+	#main-container .content.content-boxed {
+		.sidebar-o & {
+			max-width: map.get($container-max-widths-sidebar-mini, 'xl');
+		}
+	}
+}
+
+.widget-container {
+	display: grid;
+	grid-auto-rows: 416px;
+	grid-template-columns: 1fr;
+
+	grid-gap: 24px 24px;
+
+	.dashboard & {
+		grid-auto-rows: 306px;
+
+		@include media-breakpoint-up ('lg') {
+			grid-template-columns: 1fr 1fr;
+		}
+		@include media-breakpoint-up ('xl') {
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+		}
+	}
+
+	@include media-breakpoint-up ('lg') {
+		grid-template-columns: 1fr 1fr;
+	}
+	@include media-breakpoint-up ('xl') {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}

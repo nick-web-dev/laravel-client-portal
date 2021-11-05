@@ -1,0 +1,122 @@
+.btn {
+	height:  $btn-height;
+	padding: 9px $btn-padding-x;
+	text-align: center;
+
+	/* Button variants are generated in _colors.scss */
+
+	&.btn-no-outline {
+		&:focus,
+		&.focus {
+			outline: 0;
+			box-shadow: none;
+		}
+	}
+
+	&.has-icon {
+		display: inline-flex;
+		justify-content: space-between;
+		align-items: center;
+		column-gap: 10px;
+
+		> *:last-child {
+			flex-shrink: 0;
+			max-width: 16px;
+			max-height: 16px;
+		}
+		.dropdown & {
+			width: 70px;			
+			padding: 8px 10px;
+
+			> *:last-child { 
+				max-width: 12px; 
+
+				&::after {
+					display: none;      
+				}
+				svg {
+					margin-bottom: 0px;  
+				}
+				.caret-icon {
+					stroke: currentColor;
+				}
+			}
+		}
+	}
+
+	&.icon {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+
+		padding: 0 !important;
+
+		> * {
+			max-width: 16px;
+			max-height: 16px;
+		}
+		&.btn-sm { width: $btn-sm-height; }
+		&.btn-lg { width: $btn-lg-height; }
+		&.btn-xl { width: $btn-xl-height; }
+	}
+
+	&.btn-sm {
+		height: $btn-sm-height;
+		padding: $btn-padding-y-sm $btn-padding-x-sm;
+
+	}
+
+	&.btn-lg {
+		height:  $btn-lg-height;
+		padding: $btn-padding-y-lg $btn-padding-x-lg;
+
+	}
+
+	&.btn-xl {
+		height:  $btn-xl-height;
+		padding: $btn-padding-y-xl $btn-padding-x-xl;
+
+		.icon > * {
+			width: 24px;
+			height: 24px;
+		}
+	}
+
+	&:focus {
+		box-shadow: none;
+	}
+
+	div:not(.modal-content) > .block .block-header &,
+	div:not(.modal-content) > .block .block-footer & {
+		height: $btn-sm-height;
+		padding: 8px 10px;
+		font-size: 14px;
+		line-height: 18px;
+	}
+
+}
+
+.block-header .btn-group {
+	margin-right: -10px;
+
+	.btn {
+		width: auto;
+		min-width: 34px;
+		max-width: 72px;
+		padding: 0 0.5em !important;
+		letter-spacing: 0.014em;
+		text-overflow: clip;
+
+	}
+	> .btn:not(:first-child) {
+		margin-left: 0;
+	}
+}
+
+.block-footer .btn {
+	letter-spacing: 0.014em;
+
+	&::before {
+		background: #fff !important;
+	}
+}

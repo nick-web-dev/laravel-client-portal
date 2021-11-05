@@ -1,0 +1,253 @@
+@use "sass:map";
+@use "sass:color";
+
+@function gradient-dark($deg: 90deg, $color, $darken: -15%, $start: 0%, $end: 115%){
+	@return linear-gradient($deg, $color $start, color.adjust($color, $lightness: $darken) $end);
+}
+@function gradient-transparent($deg: 180deg, $color, $start: -1, $end: 0){
+	@return linear-gradient($deg, color.adjust($color, $alpha: $start), color.adjust($color, $alpha: $end));
+}
+
+@mixin button-color($color-name, $color){
+	.btn.btn-#{$color-name} {
+		&.btn-default {
+			color: $white;
+			background: gradient-dark($color: $color, $end: 100%);
+			background-size: 102%;
+			background-position-x: -1px;
+
+			&:hover,
+			input[type="checkbox"] + & {
+				background: gradient-dark($color: $color, $start: 52%, $end: 135%);
+			}
+			&:active,
+			&.active,
+			&[aria-expanded=true],
+			input:checked + & {
+				background: gradient-dark($color: $color, $start: 71%, $end: 138%);
+			}
+		}
+
+		&.btn-alt {
+			position: relative;
+			color: $color;
+			background-clip: text !important;
+			-webkit-text-fill-color: transparent;
+			background: gradient-dark($color: $color, $start: 76%);
+			background-size: 102%;
+			background-position-x: -1px;
+			border: 2px solid color.adjust($color, $alpha: -0.8);
+
+			&:hover,
+			&.hover,
+			input[type="checkbox"] + & {
+				border-image-slice: 1;
+				border-image-source: gradient-dark($color: $color, $start: 76%);
+				background: gradient-dark($color: $color, $start: 76%);
+
+				&:before {
+					background: $white;
+				}
+			}
+			&:active,
+			&.active,
+			&[aria-expanded=true],
+			input:checked + & {
+				color: $white;
+				-webkit-text-fill-color: $white;
+				-webkit-background-clip: initial !important;
+				background: gradient-dark($color: $color, $start: 76%);
+
+				&:before {
+					background: transparent;
+				}
+			}
+			&:disabled,
+			&.disabled {
+				color: color.adjust($color, $alpha: -0.8) !important;
+				-webkit-text-fill-color: color.adjust($color, $alpha: -0.8);
+				border: 2px solid color.adjust($color, $alpha: -0.8);
+
+				&:before {
+					background: color.adjust($color, $alpha: -0.9) !important;
+				}
+			}
+
+			&:before {
+				content: '';
+				background: transparent;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: -1;
+				transition: all 0.15s;
+			}
+		}
+
+		&.btn-ghost {
+			position: relative;
+			color: $color;
+			background-clip: text !important;
+			-webkit-text-fill-color: transparent;
+			background: gradient-dark($color: $color, $end: 100%);
+
+			b {
+				background-clip: text !important;
+				-webkit-text-fill-color: transparent;
+				background: gradient-dark($color: $color, $end: 100%);
+				z-index: 1;
+			}
+
+			&.has-icon {
+				background: gradient-dark($color: $color, $end: calc(100% - 16px));
+			}
+
+			&:hover {
+				border-color: color.adjust($color, $alpha: -0.9);
+			}
+
+			&:hover:before,
+			input[type="checkbox"] + & {
+				background: color.adjust($color, $alpha: -0.9) !important;
+			}
+			&:active,
+			&.active,
+			&[aria-expanded=true],
+			input:checked + & {
+				border-color: color.adjust($color, $alpha: -0.8);
+				&:before {
+					background: color.adjust($color, $alpha: -0.8) !important;
+				}
+			}
+
+			&:before {
+				content: '';
+				background: transparent;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 0;
+				transition: all 0.15s;
+			}
+		}
+
+		&.btn-ghost-alt {
+			color: $color;
+			background: transparent;
+
+			&:hover,
+			&.hover,
+			input[type="checkbox"] + & {
+				color: $color;
+				background: transparent;
+			}
+			&:active,
+			&.active,
+			&[aria-expanded=true],
+			input:checked + & {
+				color: map.get($orange, passive);
+				background: $color;
+			}
+		}
+
+		&.btn-link {
+			color: $color;
+
+			&:hover {
+				color: map.get($brand-colors, $color-name, hover);
+			}
+			&:active,
+			&.active,
+			&[aria-expanded=true] {
+				color: map.get($brand-colors, $color-name, active);
+			}
+		}
+	}
+}
+
+@each $color, $set in $brand-colors {
+	.text-#{$color} {
+		color: map.get($set, passive) !important;
+
+		&-hover, &.hover { color: map.get($set, hover) !important; }
+		&-active, &.active { color: map.get($set, active) !important; }
+		&-selected, &.selected { color: map.get($set, selected) !important; }
+	}
+	.text-#{$color}-20 {
+		background: color.adjust(map.get($set, passive), $alpha: -0.8) !important;
+	}
+	.text-#{$color}-10 {
+		background: color.adjust(map.get($set, passive), $alpha: -0.9) !important;
+	}
+	.text-gd-#{$color} {
+		background-clip: text !important;
+		-webkit-text-fill-color: transparent;
+		background: gradient-dark($color: map.get($set, passive), $darken: -20%, $end: 100%);
+	}
+
+	.bg-#{$color} {
+		background: map.get($set, passive) !important;
+		transition: all 0.25s;
+
+		&-hover, &:hover, &.hover { background: map.get($set, hover) !important; }
+		&-active, &:active, &.active { background: map.get($set, active) !important; }
+		&-selected, &:focus, &.selected { background: map.get($set, selected) !important; }
+	}
+	.bg-#{$color}-20 {
+		background: color.adjust(map.get($set, passive), $alpha: -0.8) !important;
+	}
+	.bg-#{$color}-10 {
+		background: color.adjust(map.get($set, passive), $alpha: -0.9) !important;
+	}
+
+	.bg-gd-#{$color} {
+		background: gradient-dark($color: map.get($set, passive), $end: 100%) !important;
+
+		&:hover, &.hover {
+			background: gradient-dark($color: map.get($set, passive), $start: 44%) !important;
+		}
+		&:active, &.active {
+			background: gradient-dark($color: map.get($set, passive), $start: 60%) !important;
+		}
+		&:focus, &.selected {
+			background: gradient-dark($color: map.get($set, passive), $start: 76%) !important;
+		}
+	}
+
+	.bg-gd-#{$color}-primary {
+		background: gradient-transparent($color: map.get($set, passive), $start: -0.7, $end: -0.1) !important;
+	}
+	.bg-gd-#{$color}-secondary {
+		background: gradient-transparent($color: map.get($set, passive), $start: -0.9, $end: -0.4) !important;
+	}
+	.bg-gd-#{$color}-tertiary {
+		background: gradient-transparent($color: map.get($set, passive), $end: -0.7) !important;
+	}
+
+	.bg-gd-#{$color}-light {
+		background: gradient-transparent(90deg, map.get($set, passive), -1, -0.7) !important;
+	}
+	.bg-gd-#{$color}-lighter {
+		background: gradient-transparent(90deg, map.get($set, passive), -1, -0.8) !important;
+	}
+
+	.border-#{$color} {
+		border-color: map.get($set, passive) !important;
+	}
+	.border-#{$color}-20 {
+		border-color: color.adjust(map.get($set, passive), $alpha: -0.8) !important;
+	}
+	.border-#{$color}-10 {
+		border-color: color.adjust(map.get($set, passive), $alpha: -0.9) !important;
+	}
+	.border-gd-#{$color} {
+		border-image-slice: 1;
+		border-image-source: gradient-dark($color: map.get($set, passive), $start: 100%);
+	}
+
+	@include button-color( $color, map.get($set, passive) );
+}
