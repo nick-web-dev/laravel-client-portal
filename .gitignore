@@ -37,7 +37,7 @@ public/css/themes/xplay.css
 public/css/themes/xpro.css
 public/css/themes/xsmooth.css
 public/css/themes/xwork.css
-public/mix-manifest.json
 public/js/dashmix.app.js.map
 public/js/laravel.app.js.map
 .well-known/
+/.idea
