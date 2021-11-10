@@ -2,23 +2,24 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
 use App\Models\Notification;
-use Faker\Factory;
 use Carbon\Carbon;
-use Session;
+use Faker\Factory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class Rushmore {
     protected $key;
     protected $base_url;
     protected $user;
+    //protected $api;
 
     public $faker;
 
     public static $subscriptions = [
-        'easy_order' => 'EasyOrder', 
-        'omni_fill' => 'OmniFill', 
-        'global' => 'Global', 
+        'easy_order' => 'EasyOrder',
+        'omni_fill' => 'OmniFill',
+        'global' => 'Global',
         'OWDRep'
     ];
     public static $permissions = [
@@ -47,10 +48,40 @@ class Rushmore {
 
     public function __construct() {
         $this->faker = Factory::create();
+//        $this->api = Http::withOptions([
+//            'base_uri' => config('services.rushmore.base_uri'),
+//            //'debug' => true,
+//        ])->withHeaders([
+//            'owd-api-key' => config('services.rushmore.key')
+//        ]);
     }
 
     public function getData($data_path){
         return $this->generateFakeData( $data_path );
+//        $id = 'a960de93-382a-4e0f-b7e1-de487acf3723';
+//        switch ($data_path) {
+//            case 'dashboard':
+//                $data = $this->api->get("/account-dashboard/{$id}")->json();
+//                break;
+//            case 'orders':
+//                $data = $this->api->get("/sales-orders-dashboard/{$id}")->json();
+//                break;
+//            case 'returns':
+//                $data = $this->api->get("/returns-dashboard/{$id}")->json();
+//                break;
+//            case 'asns':
+//                $data = $this->api->get("/asn-inventory-dashboard/{$id}")->json();
+//                break;
+//            case 'inventory':
+//                $data = $this->api->get("/asn-inventory-dashboard/{$id}")->json();
+//                break;
+//
+//            default:
+//                $data = ['status' => 404, 'message' => 'Data endpoint not found!'];
+//                break;
+//        }
+//
+//        return json_decode(json_encode($data));
     }
 
     public function getUserData(){
@@ -110,7 +141,7 @@ class Rushmore {
             case 'returns':     $data = $this->getReturnData();     break;
             case 'asns':        $data = $this->getASNData();        break;
             case 'inventory':   $data = $this->getInventoryData();  break;
-            
+
             default: $data = ['status' => 404, 'message' => 'Data endpoint not found!']; break;
         }
         return json_decode(json_encode( $data ));
@@ -189,7 +220,7 @@ class Rushmore {
                 ]);
             }
 
-            for ($i=$count; $i > 0; $i--) { 
+            for ($i=$count; $i > 0; $i--) {
                 $orders->push((object)[
                     'date' => $date->clone(),
                     'value' => rand(10, 100),
@@ -221,7 +252,7 @@ class Rushmore {
     }
 
     public function getNotificationData() {
-        $notifications = factory(Notification::class, 22)->make()->sortByDesc('publish_date');
+        $notifications = Notification::factory()->count(22)->make()->sortByDesc('publish_date');
         foreach ($notifications as $key => $notify) {
             $notifications[ $key ]->id = $key;
         }
@@ -291,7 +322,7 @@ class Rushmore {
             'damaged' => rand(0, 20),
         ];
     }
-  
+
     public function getASNData() {
         $nonconforming = collect();
         while($nonconforming->count() < 5) {

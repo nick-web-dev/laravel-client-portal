@@ -1,6 +1,7 @@
 <?php
 namespace App\Providers;
 
+use App\Services\RushmoreApiClient;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider {
     public function register() {
         $this->app->singleton(Rushmore::class, function() {
             return new Rushmore();
+//            return new RushmoreApiClient();
         });
     }
 
@@ -53,7 +55,7 @@ class AppServiceProvider extends ServiceProvider {
         // This directive lets us push one set of styles or scripts in the
         // case of reuable components or views
         // It takes a token after the stack name in the format:
-        // @pushonce('js_after:whateverName') 
+        // @pushonce('js_after:whateverName')
         // Token must follow php variable naming rules!
         Blade::directive('pushonce', function ($expression) {
             $domain = explode(':', trim(substr($expression, 1, -1)));

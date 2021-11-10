@@ -1,19 +1,25 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Models\Notification;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Notification::class, function (Faker $faker) {
-    return [
-        'id' => $faker->unique()->randomNumber,
-        'media' => 'media/placeholder-ann_size.png',
-        'action_link' => '#',
-        'action_text' => ucwords($faker->word),
-        'title' => $faker->sentence,
-        'content' => $faker->paragraph,
-        'author' => 'One World Direct',
-        'publish_date' => $faker->dateTimeThisMonth
-    ];
-});
+class NotificationFactory extends Factory
+{
+    protected $model = Notification::class;
+
+    public function definition(): array
+    {
+        return [
+            'id' => $this->faker->unique()->randomNumber,
+            'media' => 'media/placeholder-ann_size.png',
+            'action_link' => '#',
+            'action_text' => ucwords($this->faker->word),
+            'title' => $this->faker->sentence,
+            'content' => $this->faker->paragraph,
+            'author' => 'One World Direct',
+            'publish_date' => $this->faker->dateTimeThisMonth
+        ];
+    }
+}

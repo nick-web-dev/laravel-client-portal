@@ -1,15 +1,18 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Markdown;
 use App\Models\SubscriptionLevel;
 use Carbon\Carbon;
 
 class Announcement extends Model {
+    use HasFactory;
+
     protected $guarded = [];
 
-    // Announcement content is written in markdown, and that is how it 
+    // Announcement content is written in markdown, and that is how it
     // is stored in the DB. So it must be translated to html when displayed
     protected $casts = [
         'publish_start_date' => 'datetime',
@@ -26,7 +29,7 @@ class Announcement extends Model {
     }
 
     public function isPublished() {
-    	return $this->publish_start_date < Carbon::now() 
+    	return $this->publish_start_date < Carbon::now()
             && $this->publish_end_date > Carbon::now();
     }
 
