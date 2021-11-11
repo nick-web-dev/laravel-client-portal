@@ -1,22 +1,22 @@
 <?php
 namespace App\Providers;
 
-use App\Services\RushmoreApiClient;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\DB;
-
+use App\Models\Announcement;
 use App\Services\Rushmore;
 use Faker\Factory;
-use App\Models\Announcement;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
-    public function register() {
-        $this->app->singleton(Rushmore::class, function() {
-            return new Rushmore();
-//            return new RushmoreApiClient();
+    public function register()
+    {
+        $this->app->singleton(Rushmore::class, function () {
+            $apiUrl = env('RUSHMORE_BASE_URI');//@todo refactor after auth implementation
+            $apiKey = env('RUSHMORE_KEY');//@todo refactor after auth implementation
+            $accountId = env('RUSHMORE_ACCOUNT_ID');//@todo refactor after auth implementation
+
+            return new Rushmore($apiUrl, $apiKey, $accountId);
         });
     }
 

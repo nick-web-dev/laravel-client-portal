@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Http;
 
 class Rushmore {
     protected $key;
-    protected $base_url;
     protected $user;
-    //protected $api;
+    protected $accountId;
+    protected $api;
 
     public $faker;
 
@@ -46,42 +46,41 @@ class Rushmore {
         'Standard Priority'
     ];
 
-    public function __construct() {
+    public function __construct($apiUrl, $apiKey, $accountId) {
         $this->faker = Factory::create();
-//        $this->api = Http::withOptions([
-//            'base_uri' => config('services.rushmore.base_uri'),
-//            //'debug' => true,
-//        ])->withHeaders([
-//            'owd-api-key' => config('services.rushmore.key')
-//        ]);
+        $this->api = Http::withOptions([
+            'base_uri' => $apiUrl,
+        ])->withHeaders([
+            'owd-api-key' => $apiKey
+        ]);
+        $this->accountId = $accountId;
     }
 
-    public function getData($data_path){
-        return $this->generateFakeData( $data_path );
-//        $id = 'a960de93-382a-4e0f-b7e1-de487acf3723';
-//        switch ($data_path) {
-//            case 'dashboard':
-//                $data = $this->api->get("/account-dashboard/{$id}")->json();
-//                break;
-//            case 'orders':
-//                $data = $this->api->get("/sales-orders-dashboard/{$id}")->json();
-//                break;
-//            case 'returns':
-//                $data = $this->api->get("/returns-dashboard/{$id}")->json();
-//                break;
-//            case 'asns':
-//                $data = $this->api->get("/asn-inventory-dashboard/{$id}")->json();
-//                break;
-//            case 'inventory':
-//                $data = $this->api->get("/asn-inventory-dashboard/{$id}")->json();
-//                break;
-//
-//            default:
-//                $data = ['status' => 404, 'message' => 'Data endpoint not found!'];
-//                break;
-//        }
-//
-//        return json_decode(json_encode($data));
+    public function getData($data_path)
+    {
+        switch ($data_path) {
+            case 'dashboard':
+                $data = $this->getDashboardData();
+                break;
+            case 'orders':
+                $data = $this->getOrderData();
+                break;
+            case 'returns':
+                $data = $this->getReturnData();
+                break;
+            case 'asns':
+                $data = $this->getASNData();
+                break;
+            case 'inventory':
+                $data = $this->getInventoryData();
+                break;
+
+            default:
+                $data = (object)['status' => 404, 'message' => 'Data endpoint not found!'];
+                break;
+        }
+
+        return $data;
     }
 
     public function getUserData(){
@@ -148,24 +147,25 @@ class Rushmore {
     }
 
     public function getDashboardData() {
-        return [
-            'fulfillment' => [
+//        $this->api->get("/account-dashboard/{$this->accountId}")->json();
+        return (object)[
+            'fulfillment' => (object)[
                 'percent' => 100,
                 'accuracy' => 1,
                 'savings' => rand(9500, 19999)
             ],
-            'orders' => [
+            'orders' => (object)[
                 'total' => rand(25, 1000),
                 'onHold' => rand(0, 15),
                 'status' => rand(75, 100),
             ],
-            'asn_receives' => [
+            'asn_receives' => (object)[
                 'pending' => rand(0, 10),
                 'arrived' => rand(0, 10),
                 'in_process' => rand(0, 10),
                 'nonconforming' => rand(0, 20),
             ],
-            'inventory' => [
+            'inventory' => (object)[
                 'outOfStock' => rand(0, 5),
                 'lowInventory' => rand(0, 20),
             ]
@@ -173,6 +173,7 @@ class Rushmore {
     }
 
     public function getOrderData() {
+        //$this->api->get("/sales-orders-dashboard/{$this->accountId}")->json();
         $date = Carbon::now()->startOfDay();
         $stop_date = Carbon::now()->sub(365, 'days');
 
@@ -192,10 +193,10 @@ class Rushmore {
             ];
 
             foreach( self::$shippingMethods as $method ){
-                array_push($dayMethod['methods'], [
+                $dayMethod['methods'][] = [
                     'name' => $method,
-                    'total' => ($method == 'Economy' ? rand(500, 1000) : rand(0, 100))
-                ]);
+                    'total' => ($method === 'Economy' ? rand(500, 1000) : rand(0, 100))
+                ];
             }
 
             $ordersByMethod->push( $dayMethod );
@@ -243,12 +244,12 @@ class Rushmore {
         $orderSummary['completed'] = rand(200, $orderSummary['posted']);
         $orderSummary['status'] = $orderSummary['completed'] / $orderSummary['posted'] * 100;
 
-        return [
+        return json_decode(json_encode([
             'orderSummary' => $orderSummary,
             'shippedOrders' => $shippedOrders,
             'ordersByMethod' => $ordersByMethod,
             'orders' => $orders,
-        ];
+        ]));
     }
 
     public function getNotificationData() {
@@ -260,6 +261,7 @@ class Rushmore {
     }
 
     public function getReturnData() {
+        //$this->api->get("/returns-dashboard/{$this->accountId}")->json();
         $returns = collect();
         $orders = collect();
 
@@ -293,7 +295,7 @@ class Rushmore {
         $returns = $returns->sortBy('date');
         $orders = $orders->sortBy('date');
 
-        return (object)[
+        return json_decode(json_encode([
             'returnedUnits' => $returns->values(),
             'returnedOrders' => $orders->values(),
             'averageReturns' => [
@@ -301,10 +303,11 @@ class Rushmore {
                 'unitsPerOrder' => rand(1, 30) / 10
             ],
             'returnRate' => rand(2, 8)
-        ];
+        ]));
     }
 
     public function getInventoryData() {
+        //this->api->get("/asn-inventory-dashboard/{$this->accountId}")->json();
         $products = collect();
 
         while( $products->count() < 300 ){
@@ -315,15 +318,16 @@ class Rushmore {
                 'accuracy' => rand(45, 100)
             ]);
         }
-        return [
+        return json_decode(json_encode([
             'cyclecounted' => $products->toArray(),
             'outOfStock' => rand(0, 15),
             'lowInventory' => rand(0, 50),
             'damaged' => rand(0, 20),
-        ];
+        ]));
     }
 
     public function getASNData() {
+        //this->api->get("/asn-inventory-dashboard/{$this->accountId}")->json();
         $nonconforming = collect();
         while($nonconforming->count() < 5) {
             $nonconforming->push((object)[
@@ -334,7 +338,7 @@ class Rushmore {
                 'date' => 'Time'
             ]);
         }
-        return (object)[
+        return json_decode(json_encode([
             'asn_highlights' => [
                 'pending' => rand(1,50),
                 'arrived' => rand(1,50),
@@ -342,6 +346,6 @@ class Rushmore {
                 'nonConforming' => rand(1,50)
             ],
             'nonconforming' => $nonconforming
-        ];
+        ]));
     }
 }
