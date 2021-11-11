@@ -1,6 +1,6 @@
 @props(['asnReceives' => null])
 
-@if( !$asnReceives || has_null_props($asnReceives, 'pending', 'arrived', 'in_process', 'nonconforming') )
+@if( !$asnReceives || has_null_props($asnReceives, 'pending', 'arrived', 'inProcess', 'nonconforming') )
 <x-wip-widget-full title="ASNs & Receives" />
 @else
 
@@ -56,7 +56,7 @@
 			<figcaption>Arrived</figcaption>
 		</figure>
 		<figure class="digit-display bg-lighter">
-			{{ sprintf('%02d', $asnReceives->in_process) }}
+			{{ sprintf('%02d', $asnReceives->inProcess) }}
 			<figcaption>In Process</figcaption>
 		</figure>
 		<figure class="digit-display">

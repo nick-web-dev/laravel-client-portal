@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Dto\AccountDashBoard;
 use App\Models\Notification;
 use Carbon\Carbon;
 use Faker\Factory;
@@ -146,30 +147,11 @@ class Rushmore {
         return json_decode(json_encode( $data ));
     }
 
-    public function getDashboardData() {
-//        $this->api->get("/account-dashboard/{$this->accountId}")->json();
-        return (object)[
-            'fulfillment' => (object)[
-                'percent' => 100,
-                'accuracy' => 1,
-                'savings' => rand(9500, 19999)
-            ],
-            'orders' => (object)[
-                'total' => rand(25, 1000),
-                'onHold' => rand(0, 15),
-                'status' => rand(75, 100),
-            ],
-            'asn_receives' => (object)[
-                'pending' => rand(0, 10),
-                'arrived' => rand(0, 10),
-                'in_process' => rand(0, 10),
-                'nonconforming' => rand(0, 20),
-            ],
-            'inventory' => (object)[
-                'outOfStock' => rand(0, 5),
-                'lowInventory' => rand(0, 20),
-            ]
-        ];
+    public function getDashboardData()
+    {
+        return AccountDashBoard::fromArray(
+            $this->api->get("/account-dashboard/{$this->accountId}")->json() ?? []
+        );
     }
 
     public function getOrderData() {

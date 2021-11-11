@@ -32,12 +32,12 @@
 
             <x-dash.todays-orders :orders="$live_data->orders" />
 
-            <x-dash.asn-receives :asn-receives="$live_data->asn_receives" />
+            <x-dash.asn-receives :asn-receives="$live_data->asnReceives" />
 
             <x-dash.inventory :inventory="$live_data->inventory" />
 
             <x-dash.announcements :items="$announcements_list" />
 
         </div>
-    </div> 
+    </div>
 @endsection
