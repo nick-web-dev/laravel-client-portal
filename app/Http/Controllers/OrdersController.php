@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\Rushmore;
 
-class OrdersController extends Controller
+class OrdersController
 {
-    protected $rushmoreApiClient;
+    public function index(Rushmore $api)
+    {
+        $orders = $api->getData('orders');
 
-    public function __construct() {
-        $this->rushmoreApiClient = resolve('App\Services\Rushmore');
-    }
-
-    public function index() {
-        $order_data = $this->rushmoreApiClient->getData('orders');
-
-        // dd( $order_data );
-
-        return view('orders.index', compact('order_data'));
+        return view('orders.index', compact('orders'));
     }
 }

@@ -15,10 +15,11 @@ Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');
 Route::view('/pages/blank', 'pages.blank');
 Route::view('/pages/test', 'pages.test-bed');
+Route::view('/components/list', 'pages.list-component');
+Route::view('color-test', 'color-test');
 
 Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
 
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/update-user', [App\Services\Rushmore::class, 'updateUser'])->name('update-user');
@@ -52,5 +53,3 @@ Route::group(['prefix' => 'reports'], function () {
     Route::get('/', [ReportsController::class, 'index'])->name('reports');
 });
 
-Route::view('/components/list', 'pages.list-component');
-Route::view('color-test', 'color-test');

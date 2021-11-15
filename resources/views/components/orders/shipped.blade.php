@@ -1,36 +1,6 @@
-@php
-	use \Carbon\Carbon;
+@php($items->prepareDataSource())
 
-	$items = collect( $items );
-
-	$dataSource = collect( $items )
-		// ->where('status', 'shipped')
-		->filter(function($order){
-			return (new Carbon($order->date))->isCurrentMonth();
-		})->sortBy('date');
-
-	// $dataSource = $items->groupBy('date');
-
-	$dataSource->transform(function($dayOrders){
-		$item = collect($dayOrders->channels);
-		$item = $item->flatMap(function($channel){
-			return [$channel->name => $channel->total];
-		})->all();
-		$item['date'] = (new Carbon($dayOrders->date))->toDateString();
-		return $item;
-	});
-
-	$series = [];
-
-	foreach( $items[0]->channels as $channel ){
-		array_push($series, (object)[
-			'valueField' => $channel->name,
-			'name' => $channel->name
-		]);
-	}
-@endphp
-
-@if( !isset($items) || !$items->count() )
+@if( $items->haveNoOrders() )
 <x-wip-widget-full title="Shipped Orders" />
 @else
 <x-chart.container class="block-mode-loading" >
@@ -51,13 +21,13 @@
 @push('js_after')
 <script>
 	$(function(){
-		var dataSource = @json($dataSource->values()->toArray());
+		var dataSource = @json($items->dataSource);
 
-		// This was used to create a view of overlapping 
+		// This was used to create a view of overlapping
 		// weeks/months, now deprecated.
 
 		// function splitSeries(period){
-		// 	let new_source = [], 
+		// 	let new_source = [],
 		// 		series = [];
 
 		// 	dataSource.forEach(item => {
@@ -80,7 +50,7 @@
 		// 				val_key = date_obj.format('MMM');
 		// 				break;
 		// 		}
-				
+
 		// 		let dat_item = new_source.find(el => el.key == arg_key);
 
 		// 		if( dat_item == undefined ){
@@ -133,7 +103,7 @@
 			margin: {
 				bottom: 20
 			},
-			series: owd_palette.applySeriesColors( @json($series) ),
+			series: owd_palette.applySeriesColors(@json($items->series)),
 			title: '',
 			argumentAxis: {
 				argumentType: 'datetime',

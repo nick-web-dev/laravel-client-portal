@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="flex-grow-1 d-flex flex-column justify-content-center">
-            <x-progress-bar class="border py-5" title="Fulfillment Status" status="{{ $orderSummary->status }}" />
+            <x-progress-bar class="border py-5" title="Fulfillment Status" status="{{ $orderSummary->fulfillmentStatus }}" />
         </div>
     </x-block-content>
     <x-block-footer class="justify-content-between">

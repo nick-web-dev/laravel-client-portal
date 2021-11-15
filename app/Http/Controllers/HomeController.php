@@ -2,32 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\Rushmore;
 
-class HomeController extends Controller {
+class HomeController
+{
 
-    public function index() {
-        return view('home');
-    }
-
-    public function dashboard(Request $request) {
-        $live_data = $this->rushmoreApiClient->getData('dashboard');
-        // dd( $live_data );
+    public function dashboard(Rushmore $api)
+    {
+        $live_data = $api->getData('dashboard');
         $fulfillment = $live_data->fulfillment;
 
-
         return view('dashboard', compact('fulfillment', 'live_data'));
-    }
-
-    public function fulfillmentData() {
-        $fulfillment_data = json_decode($this->rushmoreApiClient->getFulfillmentData());
-        $fulfillment = $fulfillment_data->fulfillment;
-
-        return $fulfillment;
-    }
-
-    public function orderData() {
-        $order_data = json_decode($this->rushmoreApiClient->getOrderData());
-        return $order_data;
     }
 }
