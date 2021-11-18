@@ -8,8 +8,6 @@ class OrdersController
 {
     public function index(Rushmore $api)
     {
-        $orders = $api->getData('orders');
-
-        return view('orders.index', compact('orders'));
+        return view('orders.index', ['orders' => $api->getData('orders')]);
     }
 }
