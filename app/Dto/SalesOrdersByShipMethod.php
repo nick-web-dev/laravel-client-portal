@@ -2,11 +2,11 @@
 
 namespace App\Dto;
 
-class SalesDashboardOrdersByShipMethod
+class SalesOrdersByShipMethod
 {
     public string $date;
     /** @var OrdersByShippingMethod[] $methods */
-    public array $methods;
+    public array $methods = [];
 
     public static function fromArray(array $data): self
     {

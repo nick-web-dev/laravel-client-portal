@@ -8,10 +8,7 @@
             <x-orders.shipped :items="$orders->shippedOrders" />
             <x-orders.by-channel :items="$orders->ordersByChannel" />
             <x-orders.top-selling-items :products="$orders->topSellingItems" />
-
-{{--            <x-orders.by-method :items="$orders->ordersByShipMethod" />--}}
-{{--            <x-orders.by-method :items="$orders->shippedOrders" />--}}
-{{--            <x-orders.by-method :items="$orders->ordersByMethod ?? null" />--}}
+            <x-orders.by-method :items="$orders->ordersByShipMethod" />
         </div>
     </div>
 @endsection

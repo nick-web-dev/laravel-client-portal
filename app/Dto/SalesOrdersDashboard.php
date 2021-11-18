@@ -9,8 +9,7 @@ class SalesOrdersDashboard
     public SalesOrdersByChannel $ordersByChannel;
     /** @var SalesOrdersTopSellingItem[] $topSellingItems */
     public array $topSellingItems;
-    /** @var SalesDashboardOrdersByShipMethod[] $ordersByShipMethod */
-    public array $ordersByShipMethod;
+    public SalesOrdersDashboardOrdersByShipMethod $ordersByShipMethod;
 
     public static function fromArray(array $data): self
     {
@@ -23,10 +22,9 @@ class SalesOrdersDashboard
         foreach ($topSellingItems as $topSellingItem) {
             $instance->topSellingItems[] = SalesOrdersTopSellingItem::fromArray($topSellingItem);
         }
-        $allOrdersByShipMethod = $data['ordersByShipMethod'] ?? [];
-        foreach ($allOrdersByShipMethod as $ordersByShipMethod) {
-            $instance->ordersByShipMethod[] = SalesDashboardOrdersByShipMethod::fromArray($ordersByShipMethod);
-        }
+        $ordersByShipMethod = $data['ordersByShipMethod'] ?? [];
+        $instance->ordersByShipMethod = SalesOrdersDashboardOrdersByShipMethod::fromArray($ordersByShipMethod);
+
         return $instance;
     }
 }

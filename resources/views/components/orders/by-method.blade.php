@@ -1,31 +1,12 @@
 @props(['items'])
 
-@php 
-    use \Carbon\Carbon;
-    
-    $items = collect($items);
-    $dataSource = collect($items);
-
-    $dataSource->transform(function($dayOrders){
-        $item = collect($dayOrders->methods);
-        $item = $item->flatMap(function($method){
-            return [$method->name => $method->total];
-        })->all();
-        $item['date'] = (new Carbon($dayOrders->date))->toDateString();
-        return $item;
-    });
-
-    $series = [];
-
-    foreach( $items[0]->methods as $method ){
-        array_push($series, (object)[
-            'valueField' => $method->name,
-            'name' => $method->name
-        ]);
-    }
+@php
+    $items->prepareDataSource();
+    $dataSource = $items->dataSource;
+    $series = $items->series;
 @endphp
 
-@if( !isset($dataSource) || !$dataSource || !$dataSource->count() )
+@if( empty($dataSource) )
 <x-wip-widget-full title="Orders by Ship Method" />
 @else
 
@@ -65,10 +46,13 @@
 @pushonce('js_after:moment')
     <script src="{{ asset('js/plugins/moment/moment.min.js') }}"></script>
 @endpushonce
+@pushonce('js_after:areaSettings')
+<script src="{{ asset('js/globalAreaSettings.js') }}"></script>
+@endpushonce
 @push('js_after')
 <script>
     $(function(){
-        yearOrders = @json($dataSource->values()->toArray());
+        yearOrders = @json($dataSource);
 
         chart2 = $("#orders-by-method").dxChart( $.extend(true, {}, globalAreaSettings, {
             palette: owd_palette.colors,
