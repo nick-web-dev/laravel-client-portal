@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\Rushmore;
 
-class ReturnsController extends Controller
+class ReturnsController
 {
-    protected $rushmoreApiClient;
-
-    public function __construct() {
-        $this->rushmoreApiClient = resolve('App\Services\Rushmore');
-    }
-
-    public function index() {
-        $return_data = $this->rushmoreApiClient->getData('returns');
-        return view('returns.index', compact('return_data'));
+    public function index(Rushmore $api)
+    {
+        return view('returns.index', ['returns' => $api->getData('returns')]);
     }
 }

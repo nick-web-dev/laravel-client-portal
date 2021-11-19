@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Dto\AccountDashBoard;
+use App\Dto\ReturnsDashBoard;
 use App\Dto\SalesOrdersDashboard;
 use App\Models\Notification;
 use Carbon\Carbon;
@@ -159,82 +160,6 @@ class Rushmore {
         return SalesOrdersDashboard::fromArray(
             $this->api->get("/sales-orders-dashboard/{$this->accountId}")->json() ?? []
         );
-//        $date = Carbon::now()->startOfDay();
-//        $stop_date = Carbon::now()->sub(365, 'days');
-//
-//        $orders = collect();
-//        $count = rand(0, 50);
-//
-//        $shippedOrders = collect();
-//        $ordersByMethod = collect();
-//
-//        while( $date->isAfter($stop_date) && $orders->count() < 10000 ){
-//            $count += rand(0, 12) - 6;
-//            $count = max($count, 0);
-//
-//            $dayMethod = [
-//                'date' => $date->clone(),
-//                'methods' => []
-//            ];
-//
-//            foreach( self::$shippingMethods as $method ){
-//                $dayMethod['methods'][] = [
-//                    'name' => $method,
-//                    'total' => ($method === 'Economy' ? rand(500, 1000) : rand(0, 100))
-//                ];
-//            }
-//
-//            $ordersByMethod->push( $dayMethod );
-//
-//            if( $date->is('sunday') || $date->is('saturday') ){
-//                $shippedOrders->push([
-//                    'date' => $date->clone(),
-//                    'channels' => [
-//                        ['name' => 'Amazon', 'total' => rand(0, 10)],
-//                        ['name' => 'Walmart', 'total' => rand(0, 10)],
-//                        ['name' => 'Shopify', 'total' => rand(0, 10)],
-//                    ]
-//                ]);
-//            } else {
-//                $shippedOrders->push([
-//                    'date' => $date->clone(),
-//                    'channels' => [
-//                        ['name' => 'Amazon', 'total' => rand(0, 700)],
-//                        ['name' => 'Walmart', 'total' => rand(0, 700)],
-//                        ['name' => 'Shopify', 'total' => rand(0, 700)],
-//                    ]
-//                ]);
-//            }
-//
-//            for ($i=$count; $i > 0; $i--) {
-//                $orders->push((object)[
-//                    'date' => $date->clone(),
-//                    'value' => rand(10, 100),
-//                    'name' => 'Product Name',
-//                    'code' => 'CODE-' . rand(100, 999),
-//                    'img' => '/img/shirt.svg',
-//                    'channel' => ['Shopify', 'Walmart', 'Amazon'][rand(0,2)],
-//                    'status' => ['shipped', 'hold', 'completed'][rand(0,2)],
-//                    'method' => ['Express', 'Air', 'Standard'][rand(0,2)],
-//                ]);
-//            }
-//            $date = $date->sub(1, 'day');
-//        }
-//        $todayOrders = $orders->filter(function($order){
-//            return $order->date->isToday();
-//        });
-//
-//        $orderSummary['posted'] = rand(200, 500);
-//        $orderSummary['onHold'] = rand(0, 8);
-//        $orderSummary['completed'] = rand(200, $orderSummary['posted']);
-//        $orderSummary['status'] = $orderSummary['completed'] / $orderSummary['posted'] * 100;
-//
-//        return json_decode(json_encode([
-//            'orderSummary' => $orderSummary,
-//            'shippedOrders' => $shippedOrders,
-//            'ordersByMethod' => $ordersByMethod,
-//            'orders' => $orders,
-//        ]));
     }
 
     public function getNotificationData() {
@@ -246,49 +171,8 @@ class Rushmore {
     }
 
     public function getReturnData() {
-        //$this->api->get("/returns-dashboard/{$this->accountId}")->json();
-        $returns = collect();
-        $orders = collect();
-
-        $date = Carbon::now();
-        $stop_date = Carbon::now()->sub(365, 'days');
-
-        while( $date->isAfter($stop_date) ){
-
-            $returns->push([
-                'date' => $date->clone(),
-                'channels' => [
-                    ['name' => 'Amazon', 'total' => rand(0, 8)],
-                    ['name' => 'Walmart', 'total' => rand(0, 100)],
-                    ['name' => 'Shopify', 'total' => rand(0, 15)],
-                ]
-            ]);
-
-            $orders->push([
-                'date' => $date->clone(),
-                'channels' => [
-                    ['name' => 'Amazon', 'total' => rand(0, 15)],
-                    ['name' => 'Walmart', 'total' => rand(0, 200)],
-                    ['name' => 'Shopify', 'total' => rand(0, 20)],
-                ]
-            ]);
-
-            $date = $date->sub(1, 'day');
-        }
-
-
-        $returns = $returns->sortBy('date');
-        $orders = $orders->sortBy('date');
-
-        return json_decode(json_encode([
-            'returnedUnits' => $returns->values(),
-            'returnedOrders' => $orders->values(),
-            'averageReturns' => [
-                'orders' => rand(2000, 5000),
-                'unitsPerOrder' => rand(1, 30) / 10
-            ],
-            'returnRate' => rand(2, 8)
-        ]));
+        $apiData = $this->api->get("/returns-dashboard/{$this->accountId}")->json();
+        return ReturnsDashBoard::fromArray($apiData);
     }
 
     public function getInventoryData() {

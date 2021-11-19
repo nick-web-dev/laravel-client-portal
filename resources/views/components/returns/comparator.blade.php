@@ -1,26 +1,3 @@
-@props(['items' => null])
-
-@php
-	use \Carbon\Carbon;
-
-	$last30 = Carbon::now()->sub(30, 'days');
-
-	$items = collect( $items );
-	$items = $items->filter(function($day) use ($last30) {
-		return $last30->isBefore($day->date);
-	});
-
-	$count = 0;
-	foreach( $items as $item ) {
-		foreach($item->channels as $channel) {
-			$count += $channel->total;
-		}
-	}
-@endphp
-
-@if( !isset($items) || !$items->count() )
-<x-wip-widget-full title="Avg. QTY Returned" />
-@else
 @push('css_after')
 	<style>
 		.grid-l-2x2 {
@@ -76,7 +53,7 @@
 			</div>
 		</div>
 		<figure class="digit-display pl-7 bg-lighter">
-			{{ $count }}
+			{{ $orders }}
 			<figcaption>Orders Returned</figcaption>
 		</figure>
 		<div class="d-flex justify-content-center align-items-center bg-lighter">
@@ -85,11 +62,10 @@
 			</div>
 		</div>
 		<figure class="digit-display pl-7 bg-lighter">
-			2.2
+			{{ $unitsPerOrder }}
 			<figcaption>Avg. Units Returned Per Order</figcaption>
 		</figure>
 	</x-block-content>
 
 	<x-block-footer class="block-footer-custom" />
 </x-block>
-@endif

@@ -1,36 +1,6 @@
-@php
-	use \Carbon\Carbon;
-
-    $items = collect($items);
-@endphp
-
-@if( !isset($items) || !$items->count() )
+@if( empty($dataSource) )
 <x-wip-widget-full title="Returned Orders" />
 @else
-
-@php
-	// $total = $items->where('status', 'completed')->count();
-
-	// $items = $items->whereIn('status', ['completed', 'null'])->groupBy('date');
-
-	// $dataSource = $items->map(function($list, $date){
-	// 	$basis = collect(['Shopify' => 0, 'Walmart' => 0, 'Amazon' => 0, 'date' => $date]);
-	// 	return $basis->merge($list->countBy(function($item){
-	// 		return $item->status != 'null' ? $item->channel : false;
-	// 	}));
-	// });
-
-	$dataSource = $items;
-
-    $dataSource->transform(function($day){
-        $item = collect($day->channels);
-        $item = $item->flatMap(function($channel){
-            return [$channel->name => $channel->total];
-        })->all();
-        $item['date'] = (new Carbon($day->date))->toDateString();
-        return $item;
-    });
-@endphp
 
 <x-block class="returned-orders-block block-mode-loading">
 	<x-block-header title="Returned Orders">
@@ -61,7 +31,7 @@
 	<script>
 		$(function() {
 			/* Returned Orders */
-			var dataSource = @json( $dataSource->values() );
+			var dataSource = @json( $dataSource );
 
 			owd_palette.shuffle();
 			var chart = $("#returnedOrdersChart").dxChart(
@@ -80,18 +50,7 @@
                 		tickInterval: {days: 1},
 						valueMarginsEnabled: false,
 					},
-					series: owd_palette.applySeriesColors([
-						{ 
-							valueField: "Walmart",
-							name: "Walmart", 
-						},{ 
-							valueField: "Shopify",
-							name: "Shopify",
-						},{ 
-							valueField: "Amazon",
-							name: "Amazon",
-						}
-					]),
+					series: @json($series),
 					zoomAndPan: {
 						argumentAxis: "both",
 					},
