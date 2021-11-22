@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Dto\AccountDashBoard;
+use App\Dto\AsnInventoryDashboard;
 use App\Dto\ReturnsDashBoard;
 use App\Dto\SalesOrdersDashboard;
 use App\Models\Notification;
-use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -71,11 +71,8 @@ class Rushmore {
             case 'returns':
                 $data = $this->getReturnData();
                 break;
-            case 'asns':
-                $data = $this->getASNData();
-                break;
-            case 'inventory':
-                $data = $this->getInventoryData();
+            case 'asns-inventory':
+                $data = $this->getAsnInventoryData();
                 break;
 
             default:
@@ -84,6 +81,32 @@ class Rushmore {
         }
 
         return $data;
+    }
+
+    public function getDashboardData(): AccountDashBoard
+    {
+        return AccountDashBoard::fromArray(
+            $this->api->get("/account-dashboard/{$this->accountId}")->json() ?? []
+        );
+    }
+
+    public function getOrderData(): SalesOrdersDashboard
+    {
+        return SalesOrdersDashboard::fromArray(
+            $this->api->get("/sales-orders-dashboard/{$this->accountId}")->json() ?? []
+        );
+    }
+
+    public function getReturnData(): ReturnsDashBoard
+    {
+        $apiData = $this->api->get("/returns-dashboard/{$this->accountId}")->json();
+        return ReturnsDashBoard::fromArray($apiData);
+    }
+
+    public function getAsnInventoryData(): AsnInventoryDashboard
+    {
+        $apiData = $this->api->get("/asn-inventory-dashboard/{$this->accountId}")->json();
+        return AsnInventoryDashboard::fromArray($apiData);
     }
 
     public function getUserData(){
@@ -135,86 +158,11 @@ class Rushmore {
         ];
     }
 
-    public function generateFakeData($data_path) {
-        $data = (object)[];
-        switch ( $data_path ) {
-            case 'dashboard':   $data = $this->getDashboardData();  break;
-            case 'orders':      $data = $this->getOrderData();      break;
-            case 'returns':     $data = $this->getReturnData();     break;
-            case 'asns':        $data = $this->getASNData();        break;
-            case 'inventory':   $data = $this->getInventoryData();  break;
-
-            default: $data = ['status' => 404, 'message' => 'Data endpoint not found!']; break;
-        }
-        return json_decode(json_encode( $data ));
-    }
-
-    public function getDashboardData()
-    {
-        return AccountDashBoard::fromArray(
-            $this->api->get("/account-dashboard/{$this->accountId}")->json() ?? []
-        );
-    }
-
-    public function getOrderData() {
-        return SalesOrdersDashboard::fromArray(
-            $this->api->get("/sales-orders-dashboard/{$this->accountId}")->json() ?? []
-        );
-    }
-
     public function getNotificationData() {
         $notifications = Notification::factory()->count(22)->make()->sortByDesc('publish_date');
         foreach ($notifications as $key => $notify) {
             $notifications[ $key ]->id = $key;
         }
         return $notifications;
-    }
-
-    public function getReturnData() {
-        $apiData = $this->api->get("/returns-dashboard/{$this->accountId}")->json();
-        return ReturnsDashBoard::fromArray($apiData);
-    }
-
-    public function getInventoryData() {
-        //this->api->get("/asn-inventory-dashboard/{$this->accountId}")->json();
-        $products = collect();
-
-        while( $products->count() < 300 ){
-            $products->push((object)[
-                'name' => "Product " . ucfirst($this->faker->word),
-                'code' => strtoupper( $this->faker->lexify('product-???') ),
-                'img' => "/img/shirt.svg",
-                'accuracy' => rand(45, 100)
-            ]);
-        }
-        return json_decode(json_encode([
-            'cyclecounted' => $products->toArray(),
-            'outOfStock' => rand(0, 15),
-            'lowInventory' => rand(0, 50),
-            'damaged' => rand(0, 20),
-        ]));
-    }
-
-    public function getASNData() {
-        //this->api->get("/asn-inventory-dashboard/{$this->accountId}")->json();
-        $nonconforming = collect();
-        while($nonconforming->count() < 5) {
-            $nonconforming->push((object)[
-                'name' => 'ASN Number | PO Number',
-                'code' => 'Status | Status Number',
-                'counter' => 00,
-                'indicator_status' => 'text-gray',
-                'date' => 'Time'
-            ]);
-        }
-        return json_decode(json_encode([
-            'asn_highlights' => [
-                'pending' => rand(1,50),
-                'arrived' => rand(1,50),
-                'inProcess' => rand(1,50),
-                'nonConforming' => rand(1,50)
-            ],
-            'nonconforming' => $nonconforming
-        ]));
     }
 }

@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\Rushmore;
 
-class ASNInventoryController extends Controller
+class ASNInventoryController
 {
-    protected $rushmoreApiClient;
+    public function index(Rushmore $api)
+    {
+        $data = $api->getData('asns-inventory');
 
-    public function __construct() {
-        $this->rushmoreApiClient = resolve('App\Services\Rushmore');
-    }
-
-    public function index() {
-        // $asn_data = json_decode($this->rushmoreApiClient->getASNData());
-        // $asn_highlights = $asn_data->asn_highlights;        
-        $asn = $this->rushmoreApiClient->getData('asns');
-        $inventory = $this->rushmoreApiClient->getData('inventory');
-        return view('asn-inventory.index', compact('asn', 'inventory'));
+        return view('asn-inventory.index', [
+            'asn'       => $data->asn,
+            'inventory' => $data->inventory,
+        ]);
     }
 }
