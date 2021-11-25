@@ -18,10 +18,6 @@ class CreateSubscriptionLevelsTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
-
-        foreach (Rushmore::$subscriptions as $sub_level) {
-            SubscriptionLevel::create(['name' => $sub_level]);
-        }
     }
 
     /**
