@@ -32,7 +32,6 @@ Route::group(['prefix' => 'announcements'], function () {
     Route::post('/{announcement}', [AnnouncementsController::class, 'update'])->name('announcement-update');
     Route::post('/status/{id}', [AnnouncementsController::class, 'update_status']);
     Route::delete('/{announcement}/delete', [AnnouncementsController::class, 'destroy'])->name('announcement-delete');
-
 });
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
@@ -49,7 +48,10 @@ Route::group(['prefix' => 'asn-inventory'], function () {
     Route::get('/', [ASNInventoryController::class, 'index'])->name('asn-inventory');
 });
 
-Route::group(['prefix' => 'reports'], function () {
-    Route::get('/', [ReportsController::class, 'index'])->name('reports');
+Route::prefix('reports')->as('reports.')->group(function () {
+    Route::get('/', [ReportsController::class, 'index'])->name('index');
+    Route::get('/show/{reportType}/{reportId}', [ReportsController::class, 'show'])->name('show');
+    Route::post('/save/{reportType}/{reportId}', [ReportsController::class, 'save'])->name('save');
+    Route::post('/create/{reportType}', [ReportsController::class, 'create'])->name('create');
 });
 

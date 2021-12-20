@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li class="nav-main-item">
-                <a class="nav-main-link {{ Route::is('reports') ? 'active' : '' }}" href="{{ route('reports') }}">
+                <a class="nav-main-link {{ Route::is('reports*') ? 'active' : '' }}" href="{{ route('reports.index') }}">
                     <x-icons.Reports />
                     <span class="nav-main-link-name">Reports</span>
                 </a>
