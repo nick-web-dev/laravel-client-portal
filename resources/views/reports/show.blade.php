@@ -108,26 +108,65 @@
 
 @push('js_after')
     <script>
-        $('a#save_as_modal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        })
-        $('#save_as_save_btn').click(function (e) {
+        // $('a#save_as_modal').on('shown.bs.modal', function () {
+        //     $('#myInput').trigger('focus')
+        // })
+        let closeModal = () => $('#save_as_close_btn').click();
+        let getGridInstance = el => $(el).dxDataGrid('instance');
+        // function openCloseDetailRow(grid) {
+        //     let rowKey = grid.getKeyByRowIndex(0);
+        //     // return $.when(grid.expandRow(rowKey)).then(()=>grid.collapseRow(rowKey));
+        //     return grid.expandRow(rowKey) && grid.collapseRow(rowKey);
+        //     //await grid.expandRow(rowKey).then(()=>grid.collapseRow(rowKey));
+        // };
+        $('#save_as_save_btn').click(async (e) => {
             /*@todo
             * - get name
             * - get all data form table and filters
             * - https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#state
             * - https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#option
+            * - https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#getCombinedFilter
+            *  - window.dataGrid.collapseAll(-1)
+            *  - window.dataGrid.getKeyByRowIndex(0)
+            *  - window.dataGrid.expandRow(key)
             * - send it to endpoint
             * - показать успех или ошибку
             * - закрыть модал
             * */
             e.preventDefault();
             e.stopPropagation();
-            console.log(window.dataGrid.state());
-            // dataGrid.expandRow(0)
-            // console.log($('.master-detail').dxDataGrid().state());
-            alert( "Changes saved!");
-            $('#save_as_close_btn').click()
+            let grid = getGridInstance("#report");
+            let rowKey = grid.getKeyByRowIndex(0);
+            $.when(grid.expandRow(rowKey))
+                .then(()=>grid.collapseRow(rowKey))
+                .then(()=>{
+                console.log(grid.state());
+                console.log(getGridInstance('.master-detail').state());
+                alert( "Changes saved!");
+                closeModal();
+            });
+            // if (internalGridDontExists) {
+            //     openCloseDetailRow(grid).then(()=>{
+            //         console.log(grid.state());
+            //         console.log(getGridInstance('.master-detail').state());
+            //         alert( "Changes saved!");
+            //         closeModal();
+            //     });
+            // } else {
+            //     // let rowKey = grid.getKeyByRowIndex(0);
+            //     // $.when(grid.expandRow(rowKey)).then(() => {
+            //     //     grid.collapseRow(rowKey);
+            //     // }).then(()=>{
+            //     //     console.log(grid.state());
+            //     //     console.log(getGridInstance('.master-detail').state());
+            //     //     alert( "Changes saved!");
+            //     //     closeModal();
+            //     // });
+            //     console.log(grid.state());
+            //     console.log(getGridInstance('.master-detail').state());
+            //     alert( "Changes saved!");
+            //     closeModal();
+            // }
         })
         $( "#save" ).click(function(e) {
             /*@todo
