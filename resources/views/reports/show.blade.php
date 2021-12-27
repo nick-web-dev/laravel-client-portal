@@ -85,17 +85,25 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Save As New Inventory Report</h5>{{--@todo name depend on report type--}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form id="report_name_form" novalidate>
+                        <div class="form-group">
+                            <label for="report_name">Name Your Report</label>
+                            <input type="text" class="form-control" id="report_name" placeholder="Example Name" required>
+                            <div class="invalid-feedback">
+                                Please choose a name for report.
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button id="save_as_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="save_as_save_btn" type="button" class="btn btn-primary">Save changes</button>
+{{--                    <button id="save_as_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+                    <button id="save_as_save_btn" type="button" class="btn btn-primary">Save New Report</button>
                 </div>
             </div>
         </div>
@@ -108,17 +116,28 @@
 
 @push('js_after')
     <script>
-        // $('a#save_as_modal').on('shown.bs.modal', function () {
-        //     $('#myInput').trigger('focus')
-        // })
-        let closeModal = () => $('#save_as_close_btn').click();
+        let saveAsModal = $('#save_as_modal');
+        let closeModal = () => saveAsModal.modal('hide');
+        let reportNameForm = document.getElementById('report_name_form');
+        let reportName = document.getElementById('report_name');
         let getGridInstance = el => $(el).dxDataGrid('instance');
-        // function openCloseDetailRow(grid) {
-        //     let rowKey = grid.getKeyByRowIndex(0);
-        //     // return $.when(grid.expandRow(rowKey)).then(()=>grid.collapseRow(rowKey));
-        //     return grid.expandRow(rowKey) && grid.collapseRow(rowKey);
-        //     //await grid.expandRow(rowKey).then(()=>grid.collapseRow(rowKey));
-        // };
+        let validateReportNameForm = () => reportNameForm.checkValidity() === false ? reportNameForm.classList.add('was-validated') : true;
+        let prepareData = (cb) => {
+            let grid = getGridInstance("#report");
+            let rowKey = grid.getKeyByRowIndex(0);
+            $.when(grid.expandRow(rowKey))
+                .then(()=> {
+                    grid.collapseRow(rowKey);
+                    cb(grid.state(),getGridInstance('.master-detail').state());
+                });
+        };
+        saveAsModal.on('show.bs.modal', function () {
+            reportNameForm.classList.remove('was-validated');
+            reportName.value = '';
+        })
+        saveAsModal.on('shown.bs.modal', function () {
+            reportName.focus();
+        })
         $('#save_as_save_btn').click(async (e) => {
             /*@todo
             * - get name
@@ -135,38 +154,13 @@
             * */
             e.preventDefault();
             e.stopPropagation();
-            let grid = getGridInstance("#report");
-            let rowKey = grid.getKeyByRowIndex(0);
-            $.when(grid.expandRow(rowKey))
-                .then(()=>grid.collapseRow(rowKey))
-                .then(()=>{
-                console.log(grid.state());
-                console.log(getGridInstance('.master-detail').state());
-                alert( "Changes saved!");
-                closeModal();
-            });
-            // if (internalGridDontExists) {
-            //     openCloseDetailRow(grid).then(()=>{
-            //         console.log(grid.state());
-            //         console.log(getGridInstance('.master-detail').state());
-            //         alert( "Changes saved!");
-            //         closeModal();
-            //     });
-            // } else {
-            //     // let rowKey = grid.getKeyByRowIndex(0);
-            //     // $.when(grid.expandRow(rowKey)).then(() => {
-            //     //     grid.collapseRow(rowKey);
-            //     // }).then(()=>{
-            //     //     console.log(grid.state());
-            //     //     console.log(getGridInstance('.master-detail').state());
-            //     //     alert( "Changes saved!");
-            //     //     closeModal();
-            //     // });
-            //     console.log(grid.state());
-            //     console.log(getGridInstance('.master-detail').state());
-            //     alert( "Changes saved!");
-            //     closeModal();
-            // }
+            if (validateReportNameForm()) {
+                prepareData((outerGridState, internalGridState)=>{
+                    console.log(outerGridState, internalGridState);
+                    alert( "Changes saved!");
+                    closeModal();
+                })
+            }
         })
         $( "#save" ).click(function(e) {
             /*@todo
