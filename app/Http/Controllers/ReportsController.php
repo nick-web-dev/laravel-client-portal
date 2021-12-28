@@ -21,10 +21,16 @@ class ReportsController extends Controller
             //$reportData = $api->getReportConfig($reportType, $reportId);
             $createUrl = route('reports.create', ['reportType' => $reportType]);
             $saveUrl = route('reports.save', ['reportType' => $reportType, $reportId => $reportId]);
+            $saveAsModalTitle = [
+                'inventory' => 'Save As New Inventory Report',
+                'sales-orders' => 'Save As New Sales Orders Report',
+                'returns' => 'Save As New Returns Report',
+            ][$reportType];
 
             return view('reports.show', [
                 'saveUrl'   => $saveUrl,
                 'createUrl' => $createUrl,
+                'saveAsModalTitle' => $saveAsModalTitle,
             ]);
         } catch (\Exception $e) {
 
@@ -33,13 +39,15 @@ class ReportsController extends Controller
 
     }
 
-    public function save($reportType, $reportId)
+    public function save($reportType, $reportId, Request $request)
     {
-        return view('reports.show');
+        $data = $request->all();
+        return response()->json('done');
     }
 
-    public function create($reportType)
+    public function create($reportType, Request $request)
     {
-        return view('reports.show');
+        $data = $request->all();
+        return response()->json('done');
     }
 }

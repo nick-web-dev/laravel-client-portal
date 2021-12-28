@@ -4,88 +4,96 @@
 @endpush
 
 @push('css_after')
-<style>
-	.dx-datagrid-group-space + td::before {
-		content: none !important;
-	}
-	.dx-pages[style="visibility: hidden;"] {
-		display: none;
-	}
+    <style>
+        .dx-datagrid-group-space + td::before {
+            content: none !important;
+        }
 
-	.dx-loadpanel-content {
-		margin: 2rem !important;
-	}
+        .dx-pages[style="visibility: hidden;"] {
+            display: none;
+        }
 
-	/* Hover effect */
-	.dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row) > td:not(.dx-focused) {
-		background-color: #fff !important;
-		cursor: pointer;
-	}
-	table.dx-datagrid-table tbody tr.dx-header-row.dx-state-hover {
-		background-color: #fff;
-	}
-	/* Visibility selectbox customization */
-	.dx-list .dx-list-item.dx-list-item-selected,
-	.dx-list .dx-list-item.dx-list-item-selected.dx-state-hover {
-		background: linear-gradient(0deg, rgba(0, 132, 255, 0.2), rgba(0, 132, 255, 0.2)), #FFFFFF;
-	}
-	.dx-list .dx-list-item.dx-state-hover {
-		background: linear-gradient(0deg, rgba(0, 132, 255, 0.1), rgba(0, 132, 255, 0.1)), #FFFFFF;
-	}
-	.dx-checkbox-icon,
-	.dx-radiobutton-icon,
-	.dx-radiobutton-icon:before {
-		background-color: transparent;
-	}
-	.dx-list-select-radiobutton .dx-radiobutton-icon:before,
-	.dx-list .dx-list-item .dx-checkbox-icon:before {
-		background: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16668 0.666016L4.16668 7.33268L0.833344 4.83268' stroke='rgba(0, 29, 97, 0.2)' stroke-width='2'/%3E%3C/svg%3E%0A") center bottom no-repeat;
-	}
-	.dx-list-select-radiobutton[aria-checked="true"] .dx-radiobutton-icon:before,
-	.dx-list-item.dx-state-focused .dx-list-select-radiobutton:not([aria-checked="false"]) .dx-radiobutton-icon:before,
-	.dx-list-item.dx-state-active .dx-list-select-radiobutton:not([aria-checked="false"]) .dx-radiobutton-icon:before,
-	.dx-list .dx-checkbox-checked .dx-checkbox-icon:before {
-		border-image-source: linear-gradient(to right, #06B68C, #fff);
-		background: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16668 0.666016L4.16668 7.33268L0.833344 4.83268' stroke='%2306B68C' stroke-width='2'/%3E%3C/svg%3E%0A") center bottom no-repeat;
-	}
+        .dx-loadpanel-content {
+            margin: 2rem !important;
+        }
 
-	.dx-datagrid .dx-header-filter-empty {
-		-webkit-transition: background-image 0.2s ease-in-out;
-		transition: background-image 0.2s ease-in-out;
-	}
-	.dx-header-filter-upward {
-		background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 7L6 2L1 7' stroke='%23404040' stroke-width='2'/%3E%3C/svg%3E") !important;
-	}
+        /* Hover effect */
+        .dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row) > td:not(.dx-focused) {
+            background-color: #fff !important;
+            cursor: pointer;
+        }
 
-	.dx-datagrid-pager.dx-pager {
-		background: var(--color-lighter);
-	}
-</style>
+        table.dx-datagrid-table tbody tr.dx-header-row.dx-state-hover {
+            background-color: #fff;
+        }
+
+        /* Visibility selectbox customization */
+        .dx-list .dx-list-item.dx-list-item-selected,
+        .dx-list .dx-list-item.dx-list-item-selected.dx-state-hover {
+            background: linear-gradient(0deg, rgba(0, 132, 255, 0.2), rgba(0, 132, 255, 0.2)), #FFFFFF;
+        }
+
+        .dx-list .dx-list-item.dx-state-hover {
+            background: linear-gradient(0deg, rgba(0, 132, 255, 0.1), rgba(0, 132, 255, 0.1)), #FFFFFF;
+        }
+
+        .dx-checkbox-icon,
+        .dx-radiobutton-icon,
+        .dx-radiobutton-icon:before {
+            background-color: transparent;
+        }
+
+        .dx-list-select-radiobutton .dx-radiobutton-icon:before,
+        .dx-list .dx-list-item .dx-checkbox-icon:before {
+            background: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16668 0.666016L4.16668 7.33268L0.833344 4.83268' stroke='rgba(0, 29, 97, 0.2)' stroke-width='2'/%3E%3C/svg%3E%0A") center bottom no-repeat;
+        }
+
+        .dx-list-select-radiobutton[aria-checked="true"] .dx-radiobutton-icon:before,
+        .dx-list-item.dx-state-focused .dx-list-select-radiobutton:not([aria-checked="false"]) .dx-radiobutton-icon:before,
+        .dx-list-item.dx-state-active .dx-list-select-radiobutton:not([aria-checked="false"]) .dx-radiobutton-icon:before,
+        .dx-list .dx-checkbox-checked .dx-checkbox-icon:before {
+            border-image-source: linear-gradient(to right, #06B68C, #fff);
+            background: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16668 0.666016L4.16668 7.33268L0.833344 4.83268' stroke='%2306B68C' stroke-width='2'/%3E%3C/svg%3E%0A") center bottom no-repeat;
+        }
+
+        .dx-datagrid .dx-header-filter-empty {
+            -webkit-transition: background-image 0.2s ease-in-out;
+            transition: background-image 0.2s ease-in-out;
+        }
+
+        .dx-header-filter-upward {
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 7L6 2L1 7' stroke='%23404040' stroke-width='2'/%3E%3C/svg%3E") !important;
+        }
+
+        .dx-datagrid-pager.dx-pager {
+            background: var(--color-lighter);
+        }
+    </style>
 @endpush
 
 @section('content')
-<header class='reports-nav'>
-	<x-nav.section title="Reports">
-		<x-nav.link href="#watch-guide" text="Watch Guide" icon="play" text-class="text-gd-blue" icon-color="blue" />
-		<x-nav.link href="#save_as" id="save_as" text="Save As" icon="empty" text-class="text-gd-blue" icon-color="blue"
-                    data-toggle="modal" data-target="#save_as_modal"/>
-		<x-nav.link href="#save" id="save" text="Save" icon="empty" text-class="text-gd-blue" icon-color="blue" />
-		<x-nav.link href="{{route('reports.index')}}" text="" icon="close" text-class="text-gd-blue" icon-color="blue" />
-	</x-nav.section>
-</header>
+    <header class='reports-nav'>
+        <x-nav.section title="Reports">
+            <x-nav.link href="#watch-guide" text="Watch Guide" icon="play" text-class="text-gd-blue" icon-color="blue"/>
+            <x-nav.link href="#save_as" id="save_as" text="Save As" icon="empty" text-class="text-gd-blue"/>
+            <x-nav.link href="#save" id="save" text="Save" icon="empty" text-class="text-gd-blue" icon-color="blue"/>
+            <x-nav.link href="{{route('reports.index')}}" text="" icon="close" text-class="text-gd-blue"
+                        icon-color="blue"/>
+        </x-nav.section>
+    </header>
 
-	<div class="content content-narrow pb-20">
-		<div class="overflow-hidden">
-			<div id="report"></div>
-			<div class="bg-white height-20 rounded-bottom"></div>
-		</div>
-	</div>
+    <div class="content content-narrow pb-20">
+        <div class="overflow-hidden">
+            <div id="report"></div>
+            <div class="bg-white height-20 rounded-bottom"></div>
+        </div>
+    </div>
 
-    <div class="modal fade" id="save_as_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="save_as_modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Save As New Inventory Report</h5>{{--@todo name depend on report type--}}
+                    <h5 class="modal-title" id="exampleModalLabel">{{$saveAsModalTitle}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -94,16 +102,29 @@
                     <form id="report_name_form" novalidate>
                         <div class="form-group">
                             <label for="report_name">Name Your Report</label>
-                            <input type="text" class="form-control" id="report_name" placeholder="Example Name" required>
+                            <input type="text" class="form-control" id="report_name"
+                                   placeholder="Example Name" {{--pattern="[A-Za-z0-9]{1,}"--}} required>
                             <div class="invalid-feedback">
-                                Please choose a name for report.
+                                Please enter a nonempty name for report!
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-{{--                    <button id="save_as_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+                    {{--                    <button id="save_as_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
                     <button id="save_as_save_btn" type="button" class="btn btn-primary">Save New Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="loading" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,186 +132,242 @@
 @endsection
 
 @pushonce('js_after:gridSettings')
-	<script src="{{ asset('js/globalGridSettings.js') }}"></script>
+<script src="{{ asset('js/globalGridSettings.js') }}"></script>
 @endpushonce
 
 @push('js_after')
     <script>
-        let saveAsModal = $('#save_as_modal');
-        let closeModal = () => saveAsModal.modal('hide');
-        let reportNameForm = document.getElementById('report_name_form');
-        let reportName = document.getElementById('report_name');
+        const token = "{{ csrf_token() }}";
+        const saveAsUrl = "{{ $createUrl }}";
+        const saveUrl = "{{ $saveUrl }}";
+        const saveAsModal = $('#save_as_modal');
+        const loadingModal = $('#loading');
+        const reportNameForm = document.getElementById('report_name_form');
+        const reportName = document.getElementById('report_name');
+        let isLoading = false;
+        let reportNameValue = () => reportName.value.trim();
+        let reportNameValueIsEmpty = () => reportNameValue() === '';
+        let openSaveAsModal = () => saveAsModal.modal('show');
+        let closeSaveAsModal = () => saveAsModal.modal('hide');
+        let closeLoadingModal = () => loadingModal.modal('hide');
+        let openLoadingModal = () => loadingModal.modal('show');
+        let removeValidationErrors = () => reportNameForm.classList.remove('was-validated');
         let getGridInstance = el => $(el).dxDataGrid('instance');
-        let validateReportNameForm = () => reportNameForm.checkValidity() === false ? reportNameForm.classList.add('was-validated') : true;
+        let validateReportNameForm = () => {
+            reportName.value = reportNameValue();
+            if (reportNameForm.checkValidity() === false) {
+                reportNameForm.classList.add('was-validated');
+                return false;
+            }
+            return true;
+        }
         let prepareData = (cb) => {
             let grid = getGridInstance("#report");
             let rowKey = grid.getKeyByRowIndex(0);
             $.when(grid.expandRow(rowKey))
-                .then(()=> {
+                .then(() => {
                     grid.collapseRow(rowKey);
-                    cb(grid.state(),getGridInstance('.master-detail').state());
+                    cb(grid.state(), getGridInstance('.master-detail').state());
                 });
         };
+        reportName.addEventListener('keydown', removeValidationErrors);
+        reportNameForm.addEventListener('submit', (event)=>{
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        });
         saveAsModal.on('show.bs.modal', function () {
-            reportNameForm.classList.remove('was-validated');
+            removeValidationErrors();
             reportName.value = '';
         })
         saveAsModal.on('shown.bs.modal', function () {
             reportName.focus();
         })
+        $("#save_as").click(function (e) {
+            if (!isLoading) {
+                isLoading = true;
+                e.preventDefault();
+                e.stopPropagation();
+                openSaveAsModal()
+            }
+        });
         $('#save_as_save_btn').click(async (e) => {
             /*@todo
-            * - get name
-            * - get all data form table and filters
             * - https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#state
             * - https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#option
             * - https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Methods/#getCombinedFilter
-            *  - window.dataGrid.collapseAll(-1)
-            *  - window.dataGrid.getKeyByRowIndex(0)
-            *  - window.dataGrid.expandRow(key)
-            * - send it to endpoint
-            * - показать успех или ошибку
-            * - закрыть модал
             * */
             e.preventDefault();
             e.stopPropagation();
             if (validateReportNameForm()) {
-                prepareData((outerGridState, internalGridState)=>{
-                    console.log(outerGridState, internalGridState);
-                    alert( "Changes saved!");
-                    closeModal();
+                prepareData((outerGridState, internalGridState) => {
+                    closeSaveAsModal();
+                    setTimeout(()=>{
+                        $.post({
+                            url: saveAsUrl,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            data: JSON.stringify({
+                                name: reportNameValue(),
+                                mainGrid: outerGridState,
+                                internalGrid: internalGridState,
+                                _token: token
+                            })
+                        }).done(function (data) {
+                            alert("New report saved!");
+                            isLoading = false;
+                        }).fail(function (jqXHR, textStatus) {
+                            alert("Some error happened!");
+                            isLoading = false;
+                        });
+                    },0)
                 })
             }
         })
-        $( "#save" ).click(function(e) {
-            /*@todo
-            * - get all data form table and filters
-            * - send it to endpoint
-            * - показать успех или ошибку
-            * */
-            e.preventDefault();
-            e.stopPropagation();
-            console.log(window.dataGrid.state());
-            alert( "Changes saved!");
+        $("#save").click(function (e) {
+            if (!isLoading) {
+                isLoading = true;
+                e.preventDefault();
+                e.stopPropagation();
+                prepareData((outerGridState, internalGridState) => {
+                    $.post({
+                        url: saveUrl,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify({
+                            mainGrid: outerGridState,
+                            internalGrid: internalGridState,
+                            _token: token
+                        })
+                    }).done(function (data) {
+                        alert("Changes saved!");
+                        isLoading = false;
+                    }).fail(function (jqXHR, textStatus) {
+                        alert("Some error happened!");
+                        isLoading = false;
+                    });
+                })
+            }
         });
     </script>
-	<script src="{{ asset('/js/demo/reports-order_data.js') }}"></script>
-	<script>
-		$(function() {
+    <script src="{{ asset('/js/demo/reports-order_data.js') }}"></script>
+    <script>
+        $(function () {
 
-			// $('.export-excel').click(function(){
-			// 	dataGrid.exportToExcel({
-			// 		autoFilterEnabled: true
-			// 	});
-			// });
+            // $('.export-excel').click(function(){
+            // 	dataGrid.exportToExcel({
+            // 		autoFilterEnabled: true
+            // 	});
+            // });
 
-			window.dataGrid = $("#report").dxDataGrid( $.extend(true, {}, globalGridSettings, {
-				dataSource: orders,
-				keyExpr: "id",
+            window.dataGrid = $("#report").dxDataGrid($.extend(true, {}, globalGridSettings, {
+                dataSource: orders,
+                keyExpr: "id",
                 columnChooser: {
                     mode: "select"//https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/Configuration/columnChooser/
                 },
-                onToolbarPreparing: function(event) {
-                const dataGrid = event.component;
-                event.toolbarOptions.elementAttr = {class: "rounded"};
-                event.toolbarOptions.items = [
-                    // Date Range Picker
-                    {
-                        location: "before",
-                        widget: "dxButton",
-                        locateInMenu: "never",
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 0H6V1H10V0H12V1H16V16H0V1H4V0ZM7 5H4V7H7V5ZM4 10H7V12H4V10ZM12 5H9V7H12V5ZM9 10H12V12H9V10ZM2 14V3H14V14H2Z" fill="#001D61"/></svg>`,
-                            stylingMode: "text",
-                            template: t => {
-                                return `
+                onToolbarPreparing: function (event) {
+                    const dataGrid = event.component;
+                    event.toolbarOptions.elementAttr = {class: "rounded"};
+                    event.toolbarOptions.items = [
+                        // Date Range Picker
+                        {
+                            location: "before",
+                            widget: "dxButton",
+                            locateInMenu: "never",
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 0H6V1H10V0H12V1H16V16H0V1H4V0ZM7 5H4V7H7V5ZM4 10H7V12H4V10ZM12 5H9V7H12V5ZM9 10H12V12H9V10ZM2 14V3H14V14H2Z" fill="#001D61"/></svg>`,
+                                stylingMode: "text",
+                                template: t => {
+                                    return `
 							<span class="dx-icon">${t.icon}</span>
-							<span>${ (new Date()).toLocaleDateString() }</span>
+							<span>${(new Date()).toLocaleDateString()}</span>
 							<span class="text-muted">to</span>
-							<span>${ (new Date()).toLocaleDateString() }</span>
-					`},
-                            onClick: () => {
-                                console.info( 'Date Picker Clicked!' );
-                            }
-                        }
-                    },
-                    {
-                        location: "before",
-                        template: () => `<span class="divider"></span>`
-                    },
-                    // Somehow generate array of custom filters
-                    {
-                        location: 'before',
-                        widget: 'dxSelectBox',
-                        locateInMenu: 'auto',
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            // items: FILTER_VALUES,
-                            valueExpr: "id",
-                            displayExpr: "text",
-                            stylingMode: "filled",
-                            // value: FILTER_VALUES[0].id,
-                            onValueChanged: function(args) {
-                                console.info( 'Filter Changed!', args );
-                                if(args.value > 1) { // First index is "ALL" here
-                                    dataGrid.filter("type" , "=", args.value);
-                                } else {
-                                    dataGrid.filter(null);
+							<span>${(new Date()).toLocaleDateString()}</span>
+					`
+                                },
+                                onClick: () => {
+                                    console.info('Date Picker Clicked!');
                                 }
-                                dataGrid.load();
                             }
-                        }
-                    },
-                    {
-                        location: 'before',
-                        widget: 'dxSelectBox',
-                        locateInMenu: 'auto',
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            // items: FILTER_VALUES,
-                            valueExpr: "id",
-                            displayExpr: "text",
-                            stylingMode: "filled",
-                            // value: FILTER_VALUES[0].id,
-                            onValueChanged: function(args) {
-                                console.info( 'Filter Changed!', args );
-                                if(args.value > 1) { // First index is "ALL" here
-                                    dataGrid.filter("type" , "=", args.value);
-                                } else {
-                                    dataGrid.filter(null);
+                        },
+                        {
+                            location: "before",
+                            template: () => `<span class="divider"></span>`
+                        },
+                        // Somehow generate array of custom filters
+                        {
+                            location: 'before',
+                            widget: 'dxSelectBox',
+                            locateInMenu: 'auto',
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                // items: FILTER_VALUES,
+                                valueExpr: "id",
+                                displayExpr: "text",
+                                stylingMode: "filled",
+                                // value: FILTER_VALUES[0].id,
+                                onValueChanged: function (args) {
+                                    console.info('Filter Changed!', args);
+                                    if (args.value > 1) { // First index is "ALL" here
+                                        dataGrid.filter("type", "=", args.value);
+                                    } else {
+                                        dataGrid.filter(null);
+                                    }
+                                    dataGrid.load();
                                 }
-                                dataGrid.load();
                             }
-                        }
-                    },
-                    {
-                        location: "before",
-                        template: () => `<span class="divider"></span>`
-                    },
-                    { // Custom Filter
-                        location: "before",
-                        widget: "dxButton",
-                        locateInMenu: "auto",
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.5V1H15V4.5L10 8.5V14.5375L6 13V8.5L1 4.5Z" stroke="#001D61" stroke-width="2"/></svg>`,
-                            text: "Create Filter",
-                            stylingMode: "text",
-                            onClick: () => {
-                                console.info( 'Create Filter Clicked!' );
-                                console.log( event );
-                                // dataGrid._showFilterBuilder();
+                        },
+                        {
+                            location: 'before',
+                            widget: 'dxSelectBox',
+                            locateInMenu: 'auto',
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                // items: FILTER_VALUES,
+                                valueExpr: "id",
+                                displayExpr: "text",
+                                stylingMode: "filled",
+                                // value: FILTER_VALUES[0].id,
+                                onValueChanged: function (args) {
+                                    console.info('Filter Changed!', args);
+                                    if (args.value > 1) { // First index is "ALL" here
+                                        dataGrid.filter("type", "=", args.value);
+                                    } else {
+                                        dataGrid.filter(null);
+                                    }
+                                    dataGrid.load();
+                                }
                             }
-                        }
-                    },
-                    { // Column Chooser
-                        location: "before",
-                        widget: "dxButton",
-                        locateInMenu: "auto",
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            icon: `<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        },
+                        {
+                            location: "before",
+                            template: () => `<span class="divider"></span>`
+                        },
+                        { // Custom Filter
+                            location: "before",
+                            widget: "dxButton",
+                            locateInMenu: "auto",
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.5V1H15V4.5L10 8.5V14.5375L6 13V8.5L1 4.5Z" stroke="#001D61" stroke-width="2"/></svg>`,
+                                text: "Create Filter",
+                                stylingMode: "text",
+                                onClick: () => {
+                                    console.info('Create Filter Clicked!');
+                                    console.log(event);
+                                    // dataGrid._showFilterBuilder();
+                                }
+                            }
+                        },
+                        { // Column Chooser
+                            location: "before",
+                            widget: "dxButton",
+                            locateInMenu: "auto",
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                icon: `<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect x="16" width="2" height="16" transform="rotate(90 16 0)" fill="#001D61"/>
 						<rect x="2" y="12" width="2" height="12" transform="rotate(-180 2 12)" fill="#001D61"/>
 						<rect x="7" y="12" width="2" height="12" transform="rotate(-180 7 12)" fill="#001D61"/>
@@ -298,140 +375,143 @@
 						<rect x="16" y="10" width="2" height="16" transform="rotate(90 16 10)" fill="#001D61"/>
 						<rect x="16" y="5" width="2" height="16" transform="rotate(90 16 5)" fill="#001D61"/>
 					</svg>`,
-                            text: "Column Chooser",
-                            stylingMode: "text",
-                            onClick: () => {
-                                console.info( 'Column Chooser Clicked!' );
-                                dataGrid.showColumnChooser();
+                                text: "Column Chooser",
+                                stylingMode: "text",
+                                onClick: () => {
+                                    console.info('Column Chooser Clicked!');
+                                    dataGrid.showColumnChooser();
+                                }
                             }
-                        }
-                    },
-                    {
-                        location: "before",
-                        template: () => `<span class="divider"></span>`
-                    },
-                    { // Search
-                        location: "before",
-                        widget: "dxTextBox",
-                        locateInMenu: "never",
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            // icon: `table`,
-                            placeholder: "Search Criteria",
-                            stylingMode: "filled",
-                            onValueChanged: data => {
-                                console.info( 'Search Entered!', data );
-                                // dataGrid.doSomeSearchThing();
+                        },
+                        {
+                            location: "before",
+                            template: () => `<span class="divider"></span>`
+                        },
+                        { // Search
+                            location: "before",
+                            widget: "dxTextBox",
+                            locateInMenu: "never",
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                // icon: `table`,
+                                placeholder: "Search Criteria",
+                                stylingMode: "filled",
+                                onValueChanged: data => {
+                                    console.info('Search Entered!', data);
+                                    // dataGrid.doSomeSearchThing();
+                                }
                             }
-                        }
-                    },
-                    { // Export
-                        location: "after",
-                        widget: "dxButton",
-                        locateInMenu: "auto",
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        },
+                        { // Export
+                            location: "after",
+                            widget: "dxButton",
+                            locateInMenu: "auto",
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M11 4.5L8 1.5L5 4.5" stroke="#001D61" stroke-width="2"/>
 						<path d="M1 6V15H15V6" stroke="#001D61" stroke-width="2"/>
 						<path d="M8 2V10" stroke="#001D61" stroke-width="2"/>
 					</svg>`,
-                            stylingMode: "text",
-                            onClick: () => {
-                                console.info( 'Export Clicked!' );
-                                // dataGrid.exportToExcel({
-                                // 	autoFilterEnabled: true
-                                // });
+                                stylingMode: "text",
+                                onClick: () => {
+                                    console.info('Export Clicked!');
+                                    // dataGrid.exportToExcel({
+                                    // 	autoFilterEnabled: true
+                                    // });
+                                }
                             }
-                        }
-                    },
-                    { // Items per Page
-                        location: "after",
-                        widget: "dxDropDownButton",
-                        locateInMenu: "auto",
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            useSelectMode: true,
-                            showArrowIcon: false,
-                            dropDownOptions: {
-                                width: 230
-                            },
-                            keyExpr: 'id',
-                            itemTemplate: data => `Show ${data.value} results`,
-                            selectedItemKey: 2,
-                            stylingMode: "text",
-                            onContentReady: e => {
-                                setTimeout(() => {
+                        },
+                        { // Items per Page
+                            location: "after",
+                            widget: "dxDropDownButton",
+                            locateInMenu: "auto",
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                useSelectMode: true,
+                                showArrowIcon: false,
+                                dropDownOptions: {
+                                    width: 230
+                                },
+                                keyExpr: 'id',
+                                itemTemplate: data => `Show ${data.value} results`,
+                                selectedItemKey: 2,
+                                stylingMode: "text",
+                                onContentReady: e => {
+                                    setTimeout(() => {
+                                        let range_str = `${dataGrid.pageSize() * dataGrid.pageIndex() + 1}-${dataGrid.pageSize() * dataGrid.pageIndex() + dataGrid.pageSize()}`;
+                                        let total_count = dataGrid.totalCount();
+                                        e.component.option('text', `${range_str} of ${total_count}`);
+                                    }, 500);
+                                },
+                                onSelectionChanged: e => {
+                                    console.info('Item Count Clicked!', e, dataGrid);
+                                    dataGrid.pageSize(e.item.value != 'all' ? e.item.value : dataGrid.totalCount());
+
                                     let range_str = `${dataGrid.pageSize() * dataGrid.pageIndex() + 1}-${dataGrid.pageSize() * dataGrid.pageIndex() + dataGrid.pageSize()}`;
                                     let total_count = dataGrid.totalCount();
                                     e.component.option('text', `${range_str} of ${total_count}`);
-                                }, 500);
-                            },
-                            onSelectionChanged: e => {
-                                console.info( 'Item Count Clicked!', e, dataGrid );
-                                dataGrid.pageSize( e.item.value != 'all' ? e.item.value : dataGrid.totalCount() );
-
-                                let range_str = `${dataGrid.pageSize() * dataGrid.pageIndex() + 1}-${dataGrid.pageSize() * dataGrid.pageIndex() + dataGrid.pageSize()}`;
-                                let total_count = dataGrid.totalCount();
-                                e.component.option('text', `${range_str} of ${total_count}`);
-                            },
-                            items: [{id: 1, value: 10}, {id: 2, value: 20}, {id: 3, value: 50}, {id: 4, value: 100}, {id: 5, value: 'all'}]
-                        }
-                    },
-                    { // Page Back
-                        location: "after",
-                        widget: "dxButton",
-                        locateInMenu: "never",
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            icon: `<svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L2 6L7 11" stroke="#001D61" stroke-width="2"/></svg>`,
-                            stylingMode: "text",
-                            onClick: () => {
-                                console.info( 'Page Back Clicked!' );
-                                dataGrid.pageIndex( Math.max(0, dataGrid.pageIndex() - 1) );
+                                },
+                                items: [{id: 1, value: 10}, {id: 2, value: 20}, {id: 3, value: 50}, {
+                                    id: 4,
+                                    value: 100
+                                }, {id: 5, value: 'all'}]
                             }
-                        }
-                    },
-                    { // Page Forward
-                        location: "after",
-                        widget: "dxButton",
-                        locateInMenu: "never",
-                        options: {
-                            elementAttr: {class: "bg-blue-10 rounded"},
-                            icon: `<svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L6 6L1 1" stroke="#001D61" stroke-width="2"/></svg>`,
-                            stylingMode: "text",
-                            onClick: () => {
-                                console.info( 'Page Forward Clicked!' );
-                                dataGrid.pageIndex( Math.min(dataGrid.pageCount() - 1, dataGrid.pageIndex() + 1) );
+                        },
+                        { // Page Back
+                            location: "after",
+                            widget: "dxButton",
+                            locateInMenu: "never",
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                icon: `<svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L2 6L7 11" stroke="#001D61" stroke-width="2"/></svg>`,
+                                stylingMode: "text",
+                                onClick: () => {
+                                    console.info('Page Back Clicked!');
+                                    dataGrid.pageIndex(Math.max(0, dataGrid.pageIndex() - 1));
+                                }
                             }
-                        }
-                    },
-                ]
-            },
-				onExporting: function(e) {
-					var workbook = new ExcelJS.Workbook();
-					var worksheet = workbook.addWorksheet('Orders');
-					DevExpress.excelExporter.exportDataGrid({
-						component: e.component,
-						worksheet: worksheet,
-						autoFilterEnabled: true
-					}).then(function() {
-						workbook.xlsx.writeBuffer().then(function(buffer) {
-							saveAs(new Blob([buffer], {
-								type: 'application/octet-stream'
-							}), 'Orders.xlsx');
-						});
-					});
-					e.cancel = true;
-				},
-				onContentReady: function(e) {
-					e.element.find('.dx-datagrid-rowsview tr').each(function(i, el){
-						el = $(el);
-						let rowindex = el.attr('aria-rowindex');
-						el.find('td:first-child').attr('data-rowindex', rowindex);
-					});
-				},
-				columns: [
+                        },
+                        { // Page Forward
+                            location: "after",
+                            widget: "dxButton",
+                            locateInMenu: "never",
+                            options: {
+                                elementAttr: {class: "bg-blue-10 rounded"},
+                                icon: `<svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L6 6L1 1" stroke="#001D61" stroke-width="2"/></svg>`,
+                                stylingMode: "text",
+                                onClick: () => {
+                                    console.info('Page Forward Clicked!');
+                                    dataGrid.pageIndex(Math.min(dataGrid.pageCount() - 1, dataGrid.pageIndex() + 1));
+                                }
+                            }
+                        },
+                    ]
+                },
+                onExporting: function (e) {
+                    var workbook = new ExcelJS.Workbook();
+                    var worksheet = workbook.addWorksheet('Orders');
+                    DevExpress.excelExporter.exportDataGrid({
+                        component: e.component,
+                        worksheet: worksheet,
+                        autoFilterEnabled: true
+                    }).then(function () {
+                        workbook.xlsx.writeBuffer().then(function (buffer) {
+                            saveAs(new Blob([buffer], {
+                                type: 'application/octet-stream'
+                            }), 'Orders.xlsx');
+                        });
+                    });
+                    e.cancel = true;
+                },
+                onContentReady: function (e) {
+                    e.element.find('.dx-datagrid-rowsview tr').each(function (i, el) {
+                        el = $(el);
+                        let rowindex = el.attr('aria-rowindex');
+                        el.find('td:first-child').attr('data-rowindex', rowindex);
+                    });
+                },
+                columns: [
                     {
                         dataField: "order_id",
                         caption: "Order ID"
@@ -555,12 +635,12 @@
                         caption: "Email",
                         visible: false
                     }],
-				masterDetail: {
-					enabled: true,
-					template: function(container, options) {
-						var currentOrderData = options.data;
-						$("<div class='master-detail'>").dxDataGrid( $.extend(true, {}, globalGridSettings, {
-							columns: [
+                masterDetail: {
+                    enabled: true,
+                    template: function (container, options) {
+                        var currentOrderData = options.data;
+                        $("<div class='master-detail'>").dxDataGrid($.extend(true, {}, globalGridSettings, {
+                            columns: [
                                 {
                                     dataField: "origin_location_name",
                                     caption: "Shipped From"
@@ -605,44 +685,44 @@
                             columnChooser: {
                                 mode: "select"
                             },
-							onToolbarPreparing: event => {
-								const dataGrid = event.component;
-								event.toolbarOptions.elementAttr = {class: "rounded"};
-								event.toolbarOptions.items = [
-									{
-										location: "before",
-										template: () => `
+                            onToolbarPreparing: event => {
+                                const dataGrid = event.component;
+                                event.toolbarOptions.elementAttr = {class: "rounded"};
+                                event.toolbarOptions.items = [
+                                    {
+                                        location: "before",
+                                        template: () => `
 											<strong>Order ID:</strong>
 											<span class="text-blue">${currentOrderData.order_id}</span>
 										`
-									},
-									{
-										location: "before",
-										template: () => `<span class="divider"></span>`
-									},
-									{ // Custom Filter
-										location: "before",
-										widget: "dxButton",
-										locateInMenu: "auto",
-										options: {
-											elementAttr: {class: "bg-blue-10 rounded"},
-											icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.5V1H15V4.5L10 8.5V14.5375L6 13V8.5L1 4.5Z" stroke="#001D61" stroke-width="2"/></svg>`,
-											text: "Create Filter",
-											stylingMode: "text",
-											onClick: () => {
-												console.info( 'Create Filter Clicked!' );
-												console.log( event );
-												// dataGrid._showFilterBuilder();
-											}
-										}
-									},
-									{ // Column Chooser
-										location: "before",
-										widget: "dxButton",
-										locateInMenu: "auto",
-										options: {
-											elementAttr: {class: "bg-blue-10 rounded"},
-											icon: `<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    },
+                                    {
+                                        location: "before",
+                                        template: () => `<span class="divider"></span>`
+                                    },
+                                    { // Custom Filter
+                                        location: "before",
+                                        widget: "dxButton",
+                                        locateInMenu: "auto",
+                                        options: {
+                                            elementAttr: {class: "bg-blue-10 rounded"},
+                                            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.5V1H15V4.5L10 8.5V14.5375L6 13V8.5L1 4.5Z" stroke="#001D61" stroke-width="2"/></svg>`,
+                                            text: "Create Filter",
+                                            stylingMode: "text",
+                                            onClick: () => {
+                                                console.info('Create Filter Clicked!');
+                                                console.log(event);
+                                                // dataGrid._showFilterBuilder();
+                                            }
+                                        }
+                                    },
+                                    { // Column Chooser
+                                        location: "before",
+                                        widget: "dxButton",
+                                        locateInMenu: "auto",
+                                        options: {
+                                            elementAttr: {class: "bg-blue-10 rounded"},
+                                            icon: `<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<rect x="16" width="2" height="16" transform="rotate(90 16 0)" fill="#001D61"/>
 												<rect x="2" y="12" width="2" height="12" transform="rotate(-180 2 12)" fill="#001D61"/>
 												<rect x="7" y="12" width="2" height="12" transform="rotate(-180 7 12)" fill="#001D61"/>
@@ -650,34 +730,34 @@
 												<rect x="16" y="10" width="2" height="16" transform="rotate(90 16 10)" fill="#001D61"/>
 												<rect x="16" y="5" width="2" height="16" transform="rotate(90 16 5)" fill="#001D61"/>
 											</svg>`,
-											text: "Column Chooser",
-											stylingMode: "text",
-											onClick: () => {
-												console.info( 'Column Chooser Clicked!' );
-												dataGrid.showColumnChooser();
-											}
-										}
-									},
-								]
-							},
-							summary: {
-								totalItems: [{
-									column: "product_number",
-									summaryType: "count",
-									displayFormat: "Product Count: {0}"
-								}]
-							},
-							dataSource: new DevExpress.data.DataSource({
-								store: new DevExpress.data.ArrayStore({
-									key: "order_id",
-									data: orderLines
-								}),
-								filter: ["order_id", "=", options.key]
-							})
-						}) ).appendTo(container);
-					}
-				}
-			} )).dxDataGrid('instance');
-		});
-	</script>
+                                            text: "Column Chooser",
+                                            stylingMode: "text",
+                                            onClick: () => {
+                                                console.info('Column Chooser Clicked!');
+                                                dataGrid.showColumnChooser();
+                                            }
+                                        }
+                                    },
+                                ]
+                            },
+                            summary: {
+                                totalItems: [{
+                                    column: "product_number",
+                                    summaryType: "count",
+                                    displayFormat: "Product Count: {0}"
+                                }]
+                            },
+                            dataSource: new DevExpress.data.DataSource({
+                                store: new DevExpress.data.ArrayStore({
+                                    key: "order_id",
+                                    data: orderLines
+                                }),
+                                filter: ["order_id", "=", options.key]
+                            })
+                        })).appendTo(container);
+                    }
+                }
+            })).dxDataGrid('instance');
+        });
+    </script>
 @endpush
