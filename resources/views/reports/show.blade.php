@@ -253,13 +253,6 @@
     <script src="{{ asset('/js/demo/reports-order_data.js') }}"></script>
     <script>
         $(function () {
-
-            // $('.export-excel').click(function(){
-            // 	dataGrid.exportToExcel({
-            // 		autoFilterEnabled: true
-            // 	});
-            // });
-
             window.dataGrid = $("#report").dxDataGrid($.extend(true, {}, globalGridSettings, {
                 dataSource: orders,
                 keyExpr: "id",
@@ -415,10 +408,7 @@
 					</svg>`,
                                 stylingMode: "text",
                                 onClick: () => {
-                                    console.info('Export Clicked!');
-                                    // dataGrid.exportToExcel({
-                                    // 	autoFilterEnabled: true
-                                    // });
+                                    dataGrid.exportToExcel();
                                 }
                             }
                         },
@@ -494,7 +484,7 @@
                     DevExpress.excelExporter.exportDataGrid({
                         component: e.component,
                         worksheet: worksheet,
-                        autoFilterEnabled: true
+                        autoFilterEnabled: false
                     }).then(function () {
                         workbook.xlsx.writeBuffer().then(function (buffer) {
                             saveAs(new Blob([buffer], {
