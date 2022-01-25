@@ -1,0 +1,71 @@
+version: "3.7"
+networks:
+    default:
+        name: ${DOCKER_NETWORK_NAME}
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: ${DOCKER_NETWORK_SUBNET}
+
+services:
+    app:
+        build:
+            args:
+                user: ${DOCKER_USER:-docker}
+                uid: ${DOCKER_UID:-1000}
+            context: ./
+            dockerfile: .docker/Dockerfile
+        environment:
+            PHP_IDE_CONFIG: 'serverName=owd.local'
+        image: ${DOCKER_IMAGE_NAME}-app-image
+        container_name: ${DOCKER_IMAGE_NAME}-app-container
+        restart: 'no'
+        working_dir: /var/www
+        tty: true
+        volumes:
+            - ./:/var/www
+        networks:
+            - default
+
+    server:
+        container_name: ${DOCKER_IMAGE_NAME}-server
+        image: nginx:1.21.1-alpine
+        tty: true
+        restart: 'no'
+        ports:
+            - "${HTTP_PORT:-80}:80"
+        depends_on:
+            - app
+        volumes:
+            - ./:/var/www
+            - .docker/default.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - default
+
+    db:
+        image: mysql:8.0.25
+        container_name: ${DOCKER_DB_IMAGE_NAME}-db
+        command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        restart: 'no'
+        tty: true
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        ports:
+            - "${DOCKER_DB_EXPOSED_PORT:-3306}:3306"
+        networks:
+            - default
+
+    npm:
+      image: node:16.13-alpine
+      container_name: ${DOCKER_IMAGE_NAME}-npm
+      restart: 'no'
+      user: ${DOCKER_UID:-1000}
+      volumes:
+        - ./:/var/www/html
+      working_dir: /var/www/html
+#      command: [sh, -c, "yarn install && npm run dev && npm run watch-poll"]
+      command: [sh, -c, "yarn install && npm run dev"]

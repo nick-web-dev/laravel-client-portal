@@ -4,338 +4,196 @@
 @endpush
 
 @push('css_after')
-<style>
-	.dx-datagrid-group-space + td::before {
-		content: none !important;
-	}
-	.dx-pages[style="visibility: hidden;"] {
-		display: none;
-	}
 
-	.dx-loadpanel-content {
-		margin: 2rem !important;
-	}
-
-	/* Hover effect */
-	.dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row) > td:not(.dx-focused) {
-		background-color: #fff !important;
-		cursor: pointer;
-	}
-	table.dx-datagrid-table tbody tr.dx-header-row.dx-state-hover {
-		background-color: #fff;
-	}
-	/* Visibility selectbox customization */
-	.dx-list .dx-list-item.dx-list-item-selected,
-	.dx-list .dx-list-item.dx-list-item-selected.dx-state-hover {
-		background: linear-gradient(0deg, rgba(0, 132, 255, 0.2), rgba(0, 132, 255, 0.2)), #FFFFFF;
-	}
-	.dx-list .dx-list-item.dx-state-hover {
-		background: linear-gradient(0deg, rgba(0, 132, 255, 0.1), rgba(0, 132, 255, 0.1)), #FFFFFF;
-	}
-	.dx-checkbox-icon,
-	.dx-radiobutton-icon,
-	.dx-radiobutton-icon:before {
-		background-color: transparent;
-	}
-	.dx-list-select-radiobutton .dx-radiobutton-icon:before,
-	.dx-list .dx-list-item .dx-checkbox-icon:before {
-		background: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16668 0.666016L4.16668 7.33268L0.833344 4.83268' stroke='rgba(0, 29, 97, 0.2)' stroke-width='2'/%3E%3C/svg%3E%0A") center bottom no-repeat;
-	}
-	.dx-list-select-radiobutton[aria-checked="true"] .dx-radiobutton-icon:before,
-	.dx-list-item.dx-state-focused .dx-list-select-radiobutton:not([aria-checked="false"]) .dx-radiobutton-icon:before,
-	.dx-list-item.dx-state-active .dx-list-select-radiobutton:not([aria-checked="false"]) .dx-radiobutton-icon:before,
-	.dx-list .dx-checkbox-checked .dx-checkbox-icon:before {
-		border-image-source: linear-gradient(to right, #06B68C, #fff);
-		background: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16668 0.666016L4.16668 7.33268L0.833344 4.83268' stroke='%2306B68C' stroke-width='2'/%3E%3C/svg%3E%0A") center bottom no-repeat;
-	}
-
-	.dx-datagrid .dx-header-filter-empty {
-		-webkit-transition: background-image 0.2s ease-in-out;
-		transition: background-image 0.2s ease-in-out;
-	}
-	.dx-header-filter-upward {
-		background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 7L6 2L1 7' stroke='%23404040' stroke-width='2'/%3E%3C/svg%3E") !important;
-	}
-
-	.dx-datagrid-pager.dx-pager {
-		background: var(--color-lighter);
-	}
-</style>
 @endpush
 
 @section('content')
-	<x-nav.section title="Reports">
-		<x-nav.link href="#demo-link" text="New Criteria" icon="new" text-class="text-gd-blue" icon-color="blue" />
-	</x-nav.section>
+    <header class='reports-nav'>
+        <x-nav.section title="Your Report Library">
+            <x-nav.link href="#watch-guide" text="Watch Guide" icon="play" text-class="text-gd-blue" icon-color="blue" />
+        </x-nav.section>
+    </header>
 
-	<div class="content content-narrow pb-20">
-		<div class="overflow-hidden">
-			<div id="report"></div>
-			<div class="bg-white height-20 rounded-bottom"></div>
-		</div>
-	</div>
+    <div class="custom-reports__wrapper content content-narrow pb-20">
+        <div class="custom-reports__header row">
+            <h4 class="custom-reports__header-company-name">Walmart</h4>
+            <h3 class="custom-reports__header-title">Custom Reports</h3>
+        </div>
+        <!-- Shipments begin -->
+        <div class="container-fluid custom-reports__list shipments__reports">
+            <div class="custom-report__labels">
+                <label class='custom-reports__category-label'>Shipments</label>
+                <label class='custom-reports__qty'>03</label>
+            </div>
+            <div class="row custom-reports__cards">
+                <div class="col-lg-4">
+                    <div class=" custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'sales-orders','reportId'=>1,])}}" class='link-overlay'></a>
+                        <div class="card-icon"></div>
+                        <div class="card-content">
+                            <label class='report-date'>Aug 17, 2021 </label>
+                            <h3 class='report-title'>Name of the report</h3>
+                            <p class='report-desc'>Data: Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                        <div class="card-controls">
+                            <div class="report-export">
+                                <a href="#" class="btn" name="buttonReportExport">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                                        <path d="M20 13.5L17 10.5L14 13.5" stroke="#0084FF" stroke-width="2"/>
+                                        <path d="M10 15V24H24V15" stroke="#0084FF" stroke-width="2"/>
+                                        <path d="M17 11V19" stroke="#0084FF" stroke-width="2"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="report-more dropdown">
+                                <button class="btn" type="button" id="dropdownMoreButton" data-toggle="dropdown" aria-expanded="false">
+                                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11 19C12.1046 19 13 18.1046 13 17C13 15.8954 12.1046 15 11 15C9.89543 15 9 15.8954 9 17C9 18.1046 9.89543 19 11 19ZM19 17C19 18.1046 18.1046 19 17 19C15.8954 19 15 18.1046 15 17C15 15.8954 15.8954 15 17 15C18.1046 15 19 15.8954 19 17ZM25 17C25 18.1046 24.1046 19 23 19C21.8954 19 21 18.1046 21 17C21 15.8954 21.8954 15 23 15C24.1046 15 25 15.8954 25 17Z" fill="#0084FF"/>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMoreButton">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class=" custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'sales-orders','reportId'=>1,])}}" class='link-overlay'></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class=" custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'sales-orders','reportId'=>1,])}}" class='link-overlay'></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shipments end -->
+
+        <!-- Orders begin -->
+        <div class="container-fluid custom-reports__list orders__reports">
+            <div class="custom-report__labels">
+                <label class='custom-reports__category-label'>Orders</label>
+                <label class='custom-reports__qty'>03</label>
+            </div>
+            <div class="row custom-reports__cards">
+                <div class="col-lg-4">
+                    <div class="custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'inventory','reportId'=>1,])}}" class='link-overlay'></a>
+                        <div class="card-icon"></div>
+                        <div class="card-content">
+                            <label class='report-date'>Aug 17, 2021 </label>
+                            <h3 class='report-title'>Name of the report</h3>
+                            <p class='report-desc'>Data: Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                        <div class="card-controls">
+                            <div class="report-export">
+                                <a href="#" class="btn" name="buttonReportExport">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                                        <path d="M20 13.5L17 10.5L14 13.5" stroke="#0084FF" stroke-width="2"/>
+                                        <path d="M10 15V24H24V15" stroke="#0084FF" stroke-width="2"/>
+                                        <path d="M17 11V19" stroke="#0084FF" stroke-width="2"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="report-more dropdown">
+                                <button class="btn" type="button" id="dropdownMoreButton" data-toggle="dropdown" aria-expanded="false">
+                                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11 19C12.1046 19 13 18.1046 13 17C13 15.8954 12.1046 15 11 15C9.89543 15 9 15.8954 9 17C9 18.1046 9.89543 19 11 19ZM19 17C19 18.1046 18.1046 19 17 19C15.8954 19 15 18.1046 15 17C15 15.8954 15.8954 15 17 15C18.1046 15 19 15.8954 19 17ZM25 17C25 18.1046 24.1046 19 23 19C21.8954 19 21 18.1046 21 17C21 15.8954 21.8954 15 23 15C24.1046 15 25 15.8954 25 17Z" fill="#0084FF"/>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMoreButton">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'inventory','reportId'=>1,])}}" class='link-overlay'></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'inventory','reportId'=>1,])}}" class='link-overlay'></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Orders end -->
+        <!-- Returns begin -->
+        <div class="container-fluid custom-reports__list returns__reports">
+            <div class="custom-report__labels">
+                <label class='custom-reports__category-label'>Returns</label>
+                <label class='custom-reports__qty'>03</label>
+            </div>
+            <div class="row custom-reports__cards">
+                <div class="col-lg-4">
+                    <div class="custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'returns','reportId'=>1,])}}" class='link-overlay'></a>
+                        <div class="card-icon"></div>
+                        <div class="card-content">
+                            <label class='report-date'>Aug 17, 2021 </label>
+                            <h3 class='report-title'>Name of the report</h3>
+                            <p class='report-desc'>Data: Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                        <div class="card-controls">
+                            <div class="report-export">
+                                <a href="#" class="btn" name="buttonReportExport">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                                        <path d="M20 13.5L17 10.5L14 13.5" stroke="#0084FF" stroke-width="2"/>
+                                        <path d="M10 15V24H24V15" stroke="#0084FF" stroke-width="2"/>
+                                        <path d="M17 11V19" stroke="#0084FF" stroke-width="2"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="report-more dropdown">
+                                <button class="btn" type="button" id="dropdownMoreButton" data-toggle="dropdown" aria-expanded="false">
+                                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11 19C12.1046 19 13 18.1046 13 17C13 15.8954 12.1046 15 11 15C9.89543 15 9 15.8954 9 17C9 18.1046 9.89543 19 11 19ZM19 17C19 18.1046 18.1046 19 17 19C15.8954 19 15 18.1046 15 17C15 15.8954 15.8954 15 17 15C18.1046 15 19 15.8954 19 17ZM25 17C25 18.1046 24.1046 19 23 19C21.8954 19 21 18.1046 21 17C21 15.8954 21.8954 15 23 15C24.1046 15 25 15.8954 25 17Z" fill="#0084FF"/>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMoreButton">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'returns','reportId'=>1,])}}" class='link-overlay'></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'returns','reportId'=>1,])}}" class='link-overlay'></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="custom-reports__card">
+                        <a href="{{route('reports.show', ['reportType'=>'returns','reportId'=>1,])}}" class='link-overlay'></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Returns end -->
+    </div>
 
 @endsection
 
 @pushonce('js_after:gridSettings')
-	<script src="{{ asset('js/globalGridSettings.js') }}"></script>
+
 @endpushonce
 
 @push('js_after')
-	<script src="{{ asset('/js/demo/reports-order_data.js') }}"></script>
-	<script>
-		$(function() {
-
-			// $('.export-excel').click(function(){
-			// 	dataGrid.exportToExcel({
-			// 		autoFilterEnabled: true
-			// 	});
-			// });
-
-			window.dataGrid = $("#report").dxDataGrid( $.extend(true, {}, globalGridSettings, {
-				dataSource: orders,
-				keyExpr: "id",
-				onExporting: function(e) {
-					var workbook = new ExcelJS.Workbook();
-					var worksheet = workbook.addWorksheet('Orders');
-					DevExpress.excelExporter.exportDataGrid({
-						component: e.component,
-						worksheet: worksheet,
-						autoFilterEnabled: true
-					}).then(function() {
-						workbook.xlsx.writeBuffer().then(function(buffer) {
-							saveAs(new Blob([buffer], {
-								type: 'application/octet-stream'
-							}), 'Orders.xlsx');
-						});
-					});
-					e.cancel = true;
-				},
-				onContentReady: function(e) {
-					e.element.find('.dx-datagrid-rowsview tr').each(function(i, el){
-						el = $(el);
-						let rowindex = el.attr('aria-rowindex');
-						el.find('td:first-child').attr('data-rowindex', rowindex);
-					});
-				},
-				columns: [{
-					dataField: "order_id",
-					caption: "Order ID"
-				}, {
-					dataField: "state",
-					caption: "Order Status"
-				}, {
-					dataField: "last_ship_date",
-					caption: "Last Ship Date",
-					dataType: "date"
-				}, {
-					dataField: "delivery_contact.name",
-					caption: "Name",
-					width: 150
-				}, {
-					dataField: "delivery_contact.city",
-					caption: "City"
-				}, {
-					dataField: "delivery_contact.state_or_province_code",
-					caption: "State"
-				}, {
-					dataField: "customer_reference_number",
-					caption: "Reference Number",
-					width: 150,
-					visible: false
-				}, {
-					dataField: "purchase_order_number",
-					caption: "Reference PO Number",
-					visible: false
-				}, {
-					dataField: "delivery_terms",
-					caption: "Delivery Terms",
-					alignment: "center",
-					visible: false
-				}, {
-					dataField: "channel_name",
-					caption: "Channel",
-					visible: false
-				}, {
-					dataField: "business_model",
-					caption: "Business Model",
-					visible: false
-				}, {
-					dataField: "shipping_method_name",
-					caption: "Ship Method",
-					visible: false
-				}, {
-					dataField: "ship_earliest_on",
-					caption: "No Earlier Than",
-					dataType: "datetime",
-					visible: false
-				}, {
-					dataField: "ship_latest_on",
-					caption: "No Later Than",
-					dataType: "datetime",
-					visible: false
-				}, {
-					dataField: "ship_at",
-					caption: "SLA",
-					dataType: "datetime",
-					visible: false
-				}, {
-					dataField: "created_at",
-					caption: "Created",
-					dataType: "datetime",
-					visible: false
-				}, {
-					dataField: "updated_at",
-					caption: "Updated",
-					dataType: "datetime",
-					visible: false
-				}, {
-					dataField: "delivery_contact.company",
-					caption: "Company",
-					visible: false
-				}, {
-					dataField: "delivery_contact.address_lines",
-					caption: "Address",
-					visible: false
-				}, {
-					dataField: "delivery_contact.postal_code",
-					caption: "ZIP",
-					visible: false
-				}, {
-					dataField: "delivery_contact.country_code",
-					caption: "Country",
-					visible: false
-				}, {
-					dataField: "delivery_contact.phone_number",
-					caption: "Phone",
-					visible: false
-				}, {
-					dataField: "delivery_contact.fax_number",
-					caption: "Fax",
-					visible: false
-				}, {
-					dataField: "delivery_contact.email",
-					caption: "Email",
-					visible: false
-				}],
-				// summary: {
-				// 	totalItems: [{
-				// 		column: "order_id",
-				// 		summaryType: "count",
-				// 		displayFormat: "Order Count: {0}"
-				// 	}]
-				// },
-				masterDetail: {
-					enabled: true,
-					template: function(container, options) {
-						var currentOrderData = options.data;
-						$("<div>").dxDataGrid( $.extend(true, {}, globalGridSettings, {
-							columns: [{
-								dataField: "origin_location_name",
-								caption: "Shipped From"
-							}, {
-								dataField: "product_number",
-								caption: "Product ID",
-							}, {
-								dataField: "product_name",
-								caption: "Product Name"
-							}, {
-								dataField: "quantity",
-								caption: "Qty",
-								alignment: "right"
-							}, {
-								dataField: "description",
-								caption: "Product Description",
-								visible: false
-							}, {
-								dataField: "backordered_quantity",
-								caption: "Backordered Qty",
-								alignment: "right",
-								visible: false
-							}, {
-								dataField: "allocated_quantity",
-								caption: "Allocated Qty",
-								alignment: "right",
-								visible: false
-							}, {
-								dataField: "shipped_quantity",
-								caption: "Shipped Qty",
-								alignment: "right",
-								visible: false
-							}],
-							onToolbarPreparing: event => {
-								const dataGrid = event.component;
-								event.toolbarOptions.elementAttr = {class: "rounded"};
-								event.toolbarOptions.items = [
-									{
-										location: "before",
-										template: () => `
-											<strong>Order ID:</strong>
-											<span class="text-blue">${currentOrderData.order_id}</span>
-										`
-									},
-									{
-										location: "before",
-										template: () => `<span class="divider"></span>`
-									},
-									{ // Custom Filter
-										location: "before",
-										widget: "dxButton",
-										locateInMenu: "auto",
-										options: {
-											elementAttr: {class: "bg-blue-10 rounded"},
-											icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.5V1H15V4.5L10 8.5V14.5375L6 13V8.5L1 4.5Z" stroke="#001D61" stroke-width="2"/></svg>`,
-											text: "Create Filter",
-											stylingMode: "text",
-											onClick: () => {
-												console.info( 'Create Filter Clicked!' );
-												console.log( event );
-												// dataGrid._showFilterBuilder();
-											}
-										}
-									},
-									{ // Column Chooser
-										location: "before",
-										widget: "dxButton",
-										locateInMenu: "auto",
-										options: {
-											elementAttr: {class: "bg-blue-10 rounded"},
-											icon: `<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<rect x="16" width="2" height="16" transform="rotate(90 16 0)" fill="#001D61"/>
-												<rect x="2" y="12" width="2" height="12" transform="rotate(-180 2 12)" fill="#001D61"/>
-												<rect x="7" y="12" width="2" height="12" transform="rotate(-180 7 12)" fill="#001D61"/>
-												<rect x="16" y="12" width="2" height="12" transform="rotate(-180 16 12)" fill="#001D61"/>
-												<rect x="16" y="10" width="2" height="16" transform="rotate(90 16 10)" fill="#001D61"/>
-												<rect x="16" y="5" width="2" height="16" transform="rotate(90 16 5)" fill="#001D61"/>
-											</svg>`,
-											text: "Column Chooser",
-											stylingMode: "text",
-											onClick: () => {
-												console.info( 'Column Chooser Clicked!' );
-												dataGrid.showColumnChooser();
-											}
-										}
-									},
-								]
-							},
-							summary: {
-								totalItems: [{
-									column: "product_number",
-									summaryType: "count",
-									displayFormat: "Product Count: {0}"
-								}]
-							},
-							dataSource: new DevExpress.data.DataSource({
-								store: new DevExpress.data.ArrayStore({
-									key: "order_id",
-									data: orderLines
-								}),
-								filter: ["order_id", "=", options.key]
-							})
-						}) ).appendTo(container);
-					}
-				}
-			} )).dxDataGrid('instance');
-		});
-	</script>
 @endpush

@@ -10,6 +10,7 @@ use App\Models\Notification;
 use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class Rushmore {
     protected $key;
@@ -48,6 +49,8 @@ class Rushmore {
         'Overnight',
         'Standard Priority'
     ];
+
+    public static $reportTypes = ['sales-orders','inventory','returns'];
 
     public function __construct($apiUrl, $apiKey, $accountId) {
         $this->faker = Factory::create();
@@ -164,5 +167,67 @@ class Rushmore {
             $notifications[ $key ]->id = $key;
         }
         return $notifications;
+    }
+
+    public function getReports()
+    {
+        //sales-orders, inventory, returns\
+        /*{
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "viewName": "string",
+      "columnsContent": [
+        {
+          "level": 0,
+          "content": "string"
+        }
+      ],
+      "searchCriteria": [
+        {
+          "scKey": "scValue"
+        }
+      ],
+      "searchCriteriaQueryString": "?scKey=scValue",
+      "pageSize": 0,
+      "sortBy": "string",
+      "sortDirection": "asc",
+      "createdDate": "2021-12-12T19:19:10.935Z",
+      "createdByUserName": "string",
+      "modifiedDateTime": "2021-12-12T19:19:10.935Z",
+      "modifiedByUserName": "string"
+    }
+         * */
+        //$reportType = 'sales-orders';
+        $sales = $this->api->get("/account-settings/{$this->accountId}/reports-views/sales-orders")->json();
+        //$reportType = 'inventory';
+        $inventory = $this->api->get("/account-settings/{$this->accountId}/reports-views/inventory")->json();
+        //$reportType = 'returns';
+        $returns = $this->api->get("/account-settings/{$this->accountId}/reports-views/returns")->json();
+
+        return [
+            'sales' => $sales['reportViews'] ?? [],
+            'inventory' => $inventory['reportViews'] ?? [],
+            'returns' => $returns['reportViews'] ?? [],
+        ];
+    }
+
+    public function getReportConfig($reportType, $reportId): array
+    {
+        if (!in_array($reportType, self::$reportTypes, true)) {
+            throw new \Exception('Unknown report type');
+        }
+        $url = "/account-settings/{$this->accountId}/reports-views/{$reportType}/{$reportId}";
+        $reportConfig = $this->api->get($url)->json();
+        //check if we get some data and put it in VO
+        if (isset($reportConfig['errorResponses'])) {
+            Log::error('Error during getting report config', [
+                'accountId' => $this->accountId,
+                'reportType' => $reportType,
+                'reportId' => $reportId,
+                'apiResponse' => $reportConfig['errorResponses'],
+            ]);
+            throw new \Exception('Error during getting report config');
+        }
+
+        return $reportConfig;
     }
 }

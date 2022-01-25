@@ -1,0 +1,217 @@
+:root {
+    --color-light-green-selected: #cdf7ed;
+}
+.dx-dropdowneditor-icon:before {
+    content: url("data:image/svg+xml,<svg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 1L6 6L11 1' stroke='%23026F' stroke-width='2'/></svg>");
+    top: 42%;
+}
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td, .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > tr > td, .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover > td, .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover > tr > td {
+    background-color: var(--color-light-green-selected);
+    color: #515E7C;
+}
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused).dx-column-lines > td, .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused).dx-column-lines > tr > td, .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover.dx-column-lines > td, .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover.dx-column-lines > tr > td {
+    background-color: var(--color-light-green-selected);
+}
+.reports-nav a.btn.nav-item.nav-link.btn-ghost {
+    padding: 0 0 0 20px;
+}
+.reports-nav a.btn.nav-item.nav-link.btn-ghost>.mr-block{
+    margin-right:0!important;
+}
+.reports-nav a.btn.nav-item.nav-link.btn-ghost:after {
+    content:"";
+    position: relative;
+    height: 10px;
+    width: 2px;
+    background-color: #D4DCE9;
+    margin-left: 20px;
+    border-radius: 3px;
+}
+.reports-nav nav.nav.section-nav>div:nth-of-type(2)>a:last-child{
+    padding-right:20px
+}
+.reports-nav nav.nav.section-nav>div:nth-of-type(2)>a:last-child:after {
+    display: none;
+}
+
+/* Custom Reports Page */
+
+.custom-reports__wrapper {
+    margin: 50px 40px;
+    width: calc(100% - 80px);
+    background-color: #ffffff;
+    padding: 40px!important;
+}
+.row.custom-reports__header{flex-direction: column;padding: 0 20px;}
+#page-container.page-header-fixed #main-container{
+    background-color: #E5E5E5;
+}
+.custom-reports__list {
+    padding: 0;
+    margin-bottom: 50px;
+}
+.custom-reports__list:last-of-type {
+    margin-bottom: 0;
+}
+.custom-reports__header-company-name{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 18px;
+    align-items: center;
+    letter-spacing: 0.1em;
+    color: #0084FF;
+    margin-bottom: 0;
+    text-transform: uppercase;
+}
+.custom-reports__header-title{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+}
+.custom-report__labels {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding: 0 10px;
+}
+.custom-reports__list label.custom-reports__category-label{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.015em;
+    margin-bottom: 0;
+}
+.custom-reports__list label.custom-reports__qty {
+    font-family: Roboto Mono;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    margin-bottom: 0;
+}
+
+.custom-reports__card {
+    position: relative;
+    border-radius: 5px;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    height: 130px;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.custom-reports__list.shipments__reports .custom-reports__cards .custom-reports__card {
+    border: 1px solid #e6fbf6;
+}
+.custom-reports__list.shipments__reports .custom-reports__cards .custom-reports__card .card-icon {
+    background-color: #e6fbf6;
+    background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%3E%0A%09%09%09%09%09%09%09%09%09%09%09%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M14%209.00012V16H9H3C1.34315%2016%200%2017.3431%200%2019C0%2020.6569%201.34315%2022%203%2022C4.65685%2022%206%2020.6569%206%2019C6%2018.6494%205.93985%2018.3128%205.82929%2018H14.1705C14.0599%2018.3128%2013.9998%2018.6494%2013.9998%2019.0001C13.9998%2020.657%2015.3429%2022.0001%2016.9998%2022.0001C18.6566%2022.0001%2019.9998%2020.657%2019.9998%2019.0001C19.9998%2018.6495%2019.9396%2018.3129%2019.8291%2018.0001L23.9998%2018.0001V17.0001H24V10.3071L16%207.30712V3H14V3.00018H5V5.00018H14V7.00012V9.00012ZM16%209.44312V16.1707C16.3127%2016.0602%2016.6492%2016.0001%2016.9998%2016.0001L22%2016.0001V11.6931L16%209.44312ZM2%2019C2%2018.4477%202.44772%2018%203%2018C3.55228%2018%204%2018.4477%204%2019C4%2019.5523%203.55228%2020%203%2020C2.44772%2020%202%2019.5523%202%2019ZM15.9998%2019.0001C15.9998%2018.4478%2016.4475%2018.0001%2016.9998%2018.0001C17.552%2018.0001%2017.9998%2018.4478%2017.9998%2019.0001C17.9998%2019.5524%2017.552%2020.0001%2016.9998%2020.0001C16.4475%2020.0001%2015.9998%2019.5524%2015.9998%2019.0001Z%22%20fill%3D%22white%22%2F%3E%0A%09%09%09%09%09%09%09%09%09%09%09%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M14%209.00012V16H9H3C1.34315%2016%200%2017.3431%200%2019C0%2020.6569%201.34315%2022%203%2022C4.65685%2022%206%2020.6569%206%2019C6%2018.6494%205.93985%2018.3128%205.82929%2018H14.1705C14.0599%2018.3128%2013.9998%2018.6494%2013.9998%2019.0001C13.9998%2020.657%2015.3429%2022.0001%2016.9998%2022.0001C18.6566%2022.0001%2019.9998%2020.657%2019.9998%2019.0001C19.9998%2018.6495%2019.9396%2018.3129%2019.8291%2018.0001L23.9998%2018.0001V17.0001H24V10.3071L16%207.30712V3H14V3.00018H5V5.00018H14V7.00012V9.00012ZM16%209.44312V16.1707C16.3127%2016.0602%2016.6492%2016.0001%2016.9998%2016.0001L22%2016.0001V11.6931L16%209.44312ZM2%2019C2%2018.4477%202.44772%2018%203%2018C3.55228%2018%204%2018.4477%204%2019C4%2019.5523%203.55228%2020%203%2020C2.44772%2020%202%2019.5523%202%2019ZM15.9998%2019.0001C15.9998%2018.4478%2016.4475%2018.0001%2016.9998%2018.0001C17.552%2018.0001%2017.9998%2018.4478%2017.9998%2019.0001C17.9998%2019.5524%2017.552%2020.0001%2016.9998%2020.0001C16.4475%2020.0001%2015.9998%2019.5524%2015.9998%2019.0001Z%22%20fill%3D%22%2306B68C%22%2F%3E%0A%09%09%09%09%09%09%09%09%09%09%09%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M0%207H8V9H0V7Z%22%20fill%3D%22white%22%2F%3E%0A%09%09%09%09%09%09%09%09%09%09%09%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M0%207H8V9H0V7Z%22%20fill%3D%22%2306B68C%22%2F%3E%0A%09%09%09%09%09%09%09%09%09%09%09%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M5%2012H12V14H5V12Z%22%20fill%3D%22white%22%2F%3E%0A%09%09%09%09%09%09%09%09%09%09%09%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M5%2012H12V14H5V12Z%22%20fill%3D%22%2306B68C%22%2F%3E%0A%09%09%09%09%09%09%09%09%09%09%09%3C%2Fsvg%3E);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.custom-reports__list.orders__reports .custom-reports__cards .custom-reports__card {
+    border: 1px solid #e5f2ff;
+}
+.custom-reports__list.orders__reports .custom-reports__cards .custom-reports__card .card-icon {
+    background-color: #e5f2ff;
+    background-image: url(data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%2210%22%20y%3D%225%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22%2300418D%22%2F%3E%0A%3Crect%20x%3D%2210%22%20y%3D%229%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22%2300418D%22%2F%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M20%202H4V14H20V2ZM2%200V24H22V0H2ZM16.516%2017.4142L11.298%2022.6323L11.0556%2022.3898L11.0421%2022.4033L8%2019.3611L9.41421%2017.9469L11.2845%2019.8173L15.1018%2016L16.516%2017.4142Z%22%20fill%3D%22%2300418D%22%2F%3E%0A%3Crect%20x%3D%226%22%20y%3D%225%22%20width%3D%222%22%20height%3D%222%22%20fill%3D%22%2300418D%22%2F%3E%0A%3Crect%20x%3D%226%22%20y%3D%229%22%20width%3D%222%22%20height%3D%222%22%20fill%3D%22%2300418D%22%2F%3E%0A%3C%2Fsvg%3E);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.custom-reports__list.returns__reports .custom-reports__cards .custom-reports__card {
+    border: 1px solid #fff1e5;
+}
+.custom-reports__list.returns__reports .custom-reports__cards .custom-reports__card .card-icon {
+    background-color: #fff1e5;
+    background-image: url(data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M19%203H21V11H13V3H15V5H19V3ZM11%2013V1H23V13H11Z%22%20fill%3D%22%23FF7A00%22%2F%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M14.4141%2013H21V19.5859L14.4141%2013ZM13%2014.4144V21H19.5856L13%2014.4144ZM11%2023V11H23V23H11Z%22%20fill%3D%22%23FF7A00%22%2F%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M9%2013H11V21H3V13H5V15H9V13ZM1%2023V11H13V23H1Z%22%20fill%3D%22%23FF7A00%22%2F%3E%0A%3C%2Fsvg%3E%0A);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.card-icon {
+    min-width: 60px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+a.link-overlay {
+    position: absolute;
+    height: 128px;
+    width: 100%;
+    z-index: 3;
+    transition: .3s;
+    border-radius: 5px;
+}
+a.link-overlay:hover{
+    box-shadow: 0 2px 2px rgb(0 0 0 / 15%);
+}
+.card-controls {
+    width: 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 25px;
+}
+label.report-date {
+    font-family: Roboto Mono;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 16px;
+    color: #8F9AB3;
+    margin: 0;
+}
+h3.report-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #10253E;
+    margin-bottom: 6px;
+}
+p.report-desc {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    color: #8F9AB3;
+    margin-bottom: 0;
+}
+.report-more, .report-export{
+    height: 36px;
+    z-index: 5;
+}
+.report-more .btn,
+.report-export .btn {
+    padding: 0;
+    transition: .3s;
+}
+.report-more .btn:hover,
+.report-export .btn:hover{
+    background-color: #e5f2ff;
+}
