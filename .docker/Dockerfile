@@ -29,11 +29,12 @@ RUN apt-get update; \
         gd \
         gmp \
         intl; \
-    pecl install xdebug; \
-    docker-php-ext-enable xdebug gd; \
+#    pecl install xdebug; \
+#    docker-php-ext-enable xdebug gd; \
+    docker-php-ext-enable gd; \
     rm -rf /var/lib/apt/lists/*
 
-COPY .docker/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+#COPY .docker/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY .docker/local.ini /usr/local/etc/php/conf.d/zzz_app.ini
 
 ARG user

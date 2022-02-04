@@ -34,7 +34,8 @@ class AppServiceProvider extends ServiceProvider {
 
             $view->with('faker', Factory::create());
             $view->with('notifications', $rush_api->getNotificationData());
-            $announcements_list = Announcement::published()->limit(12)->get();
+//            $announcements_list = Announcement::published()->limit(12)->get(); @todo Fix after auth implementation
+            $announcements_list = collect([]);
             View::share('announcements_list', $announcements_list);
         });
 
