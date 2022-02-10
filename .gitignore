@@ -21,23 +21,23 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-public/css/dashmix.css
-public/css/themes/*
-public/js/pages
-public/js/dashmix.app.js
-public/js/laravel.app.js
+# public/css/dashmix.css
+# public/css/themes/*
+# public/js/pages
+# public/js/dashmix.app.js
+# public/js/laravel.app.js
 .htaccess
-public/mix-manifest.json
-public/css/dashmix.css.map
-public/css/themes/xdream.css
-public/css/themes/xeco.css
-public/css/themes/xinspire.css
-public/css/themes/xmodern.css
-public/css/themes/xplay.css
-public/css/themes/xpro.css
-public/css/themes/xsmooth.css
-public/css/themes/xwork.css
-public/js/dashmix.app.js.map
-public/js/laravel.app.js.map
+# public/mix-manifest.json
+# public/css/dashmix.css.map
+# public/css/themes/xdream.css
+# public/css/themes/xeco.css
+# public/css/themes/xinspire.css
+# public/css/themes/xmodern.css
+# public/css/themes/xplay.css
+# public/css/themes/xpro.css
+# public/css/themes/xsmooth.css
+# public/css/themes/xwork.css
+# public/js/dashmix.app.js.map
+# public/js/laravel.app.js.map
 .well-known/
 /.idea
