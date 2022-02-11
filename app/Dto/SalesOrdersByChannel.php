@@ -48,11 +48,18 @@ class SalesOrdersByChannel
     private function toDxPieChart(Collection $orders): array
     {
         $total = $orders->sum('total');
-        $channelOrders = $orders->map(fn(SalesOrdersOrderByChannel $order) => [
-            'channel' => $order->channelName,
-            'count'   => $order->total,
-            'percent' => round($order->total / $total * 100, 2)
-        ])->toArray();
+        $channelOrders = $orders->map(function (SalesOrdersOrderByChannel $order) use ($total) {
+            if (0 === $total) {
+                $percent = 0;
+            } else {
+                $percent = round($order->total / $total * 100, 2);
+            }
+            return [
+                'channel' => $order->channelName,
+                'count'   => $order->total,
+                'percent' => $percent
+            ];
+        })->toArray();
 
         return [
             'total' => $total,

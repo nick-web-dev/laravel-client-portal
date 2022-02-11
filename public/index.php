@@ -3,11 +3,8 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
-try {
-    define('LARAVEL_START', microtime(true));
-} catch (exception $e) {
-    print($e);
-}
+define('LARAVEL_START', microtime(true));
+
 
 
 /*
@@ -57,9 +54,9 @@ try {
     $response = $kernel->handle(
         $request = Request::capture()
     )->send();
-    
+
     $kernel->terminate($request, $response);
-    
+
 } catch (exception $e) {
     print($e);
 }
