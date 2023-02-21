@@ -91,7 +91,7 @@
                                 <dt>Product Id</dt>
                                 <dd>{{$product->productId}}</dd>
                                 <dt>Product number</dt>
-                                <dd>{{$product->number}}</dd>
+                                <dd>{{$product->sku}}</dd>
                                 <dt>Product soldRank</dt>
                                 <dd>{{$product->soldRank}}</dd>
                             </dl>

@@ -34,5 +34,12 @@ return [
         'key' => env('RUSHMORE_KEY'),
         'secret' => env('RUSHMORE_SECRET')
     ],
+    'azureadb2c' => [
+        'client_id' => env('AZURE_CLIENT_ID'),
+        'client_secret' => env('AZURE_CLIENT_SECRET'),
+        'redirect' => env('AZURE_REDIRECT_URI'),
+        'domain' => env('AADB2C_DOMAIN'),  // {your_domain}.b2clogin.com
+        'policy' => env('AADB2C_POLICY'),  // such as 'b2c_1_user_susi'
+    ],
 
 ];

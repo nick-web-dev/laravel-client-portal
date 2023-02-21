@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -38,6 +40,41 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function redirectToProvider(){
+        return Socialite::driver('azureadb2c')->redirect();
+    }
+
+    public function handleProviderCallback(){
+        //get the user from azure
+        $azureUser = Socialite::driver('azureadb2c')->user();
+
+        //dd($azureUser);
+
+        //dd($azureUser->user['user_scopes_portal']);
+
+        //create a new user in our database
+        /*$user = User::updateOrCreate([
+            'provider_id' => $azureUser->id,
+        ], [
+            'name' => $azureUser->user['name'],
+            'email' => $azureUser->user['signInName'],
+            'provider_name' => 'azure',
+            'provider_token' => $azureUser->token,
+            'provider_refresh_token' => $azureUser->refreshToken,
+            'dundas_logon_token_id' => $azureUser->user['dundas_logon_token_id'],
+            'dundas_dashboard_id' => $azureUser->user['dundas_dashboard_id'],
+            'dundas_reports_id' => $azureUser->user['dundas_reports_id'],
+            'user_scopes_portal' => serialize($azureUser->user['user_scopes_portal']),
+        ]);*/
+
+        //log user in
+        //Auth::login($user);
+
+        //redirect to dashboard
+        return redirect('/');
+
+
+    }
     public static function consumeToken($state, $id_token){
         $state = (csrf_token() == $state);
 
@@ -66,7 +103,7 @@ class LoginController extends Controller
 
         // dump( $head, $payload, $signature, $claims );
 
-        // 
+        //
         // RSASHA256(
         //     base64UrlEncode(header) + "." +
         //     base64UrlEncode(payload),

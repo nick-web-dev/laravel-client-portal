@@ -20,7 +20,7 @@
 		</div>
 	</x-block-content>
 	<x-block-content class="px-0 py-0 border-top bg-lighter">
-		<x-progress-bar title="Fulfillment Status" :status="$orders->status" />
+		<x-progress-bar title="Fulfillment Status" :status="$orders->fulfilmentStatusPercent" />
 	</x-block-content>
 </x-block>
 @endif

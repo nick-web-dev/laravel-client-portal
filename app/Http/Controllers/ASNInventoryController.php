@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Rushmore;
+//use App\Services\Rushmore;
+use App\Services\Owd;
 
 class ASNInventoryController
 {
-    public function index(Rushmore $api)
+    public function index(Owd $api)
     {
         $data = $api->getData('asns-inventory');
 

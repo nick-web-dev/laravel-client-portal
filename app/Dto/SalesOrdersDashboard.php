@@ -19,6 +19,7 @@ class SalesOrdersDashboard
         $ordersByChannel = $data['ordersByChannel'][0] ?? []; //@todo
         $instance->ordersByChannel = SalesOrdersByChannel::fromArray($ordersByChannel);
         $topSellingItems = $data['topSellingItems'] ?? [];
+        $instance->topSellingItems = [];
         foreach ($topSellingItems as $topSellingItem) {
             $instance->topSellingItems[] = SalesOrdersTopSellingItem::fromArray($topSellingItem);
         }

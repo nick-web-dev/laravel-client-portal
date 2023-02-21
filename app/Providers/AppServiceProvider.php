@@ -2,6 +2,7 @@
 namespace App\Providers;
 
 use App\Models\Announcement;
+use App\Services\Owd;
 use App\Services\Rushmore;
 use Faker\Factory;
 use Illuminate\Support\Facades\Blade;
@@ -18,13 +19,20 @@ class AppServiceProvider extends ServiceProvider {
 
             return new Rushmore($apiUrl, $apiKey, $accountId);
         });
+        $this->app->singleton(Owd::class, function(){
+            $apiUrl = env('OWD_API_BASE_URI');
+            $apiKey = env('OWD_API_KEY');
+            $apiKeyValue = env('OWD_API_KEY_VALUE');
+            $accountId = env('OWD_ACCOUNT_ID');
+            return new Owd($apiUrl,$apiKey,$apiKeyValue,$accountId);
+        });
     }
 
     public function boot() {
         if (env('APP_ENV') !== 'local') {
             \URL::forceScheme('https');
         }
-        
+
         $rush_api = resolve('App\Services\Rushmore');
 
         view()->composer('*', function($view) use ($rush_api) {

@@ -10,6 +10,18 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ReturnsController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::group(['namespace' => 'Auth'], function () {
+    // azure login
+    Route::get('auth/azure', 'LoginController@redirectToProvider')->name('azure.login');
+    Route::get('auth/callback', 'LoginController@handleProviderCallback');
+});
+
+Route::get('/auth/logout', function () {
+    Auth::logout();
+    return redirect(Socialite::driver('azureadb2c')->logout('owd.local'));
+});
+
 Route::view('/pages/template', 'pages.template');
 Route::view('/pages/slick', 'pages.slick');
 Route::view('/pages/datatables', 'pages.datatables');
