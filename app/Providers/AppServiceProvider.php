@@ -4,6 +4,7 @@ namespace App\Providers;
 use App\Models\Announcement;
 use App\Services\Owd;
 use App\Services\Rushmore;
+use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
@@ -46,8 +47,13 @@ class AppServiceProvider extends ServiceProvider {
 
             $view->with('faker', Factory::create());
             $view->with('notifications', $rush_api->getNotificationData());
-//            $announcements_list = Announcement::published()->limit(12)->get(); @todo Fix after auth implementation
-            $announcements_list = collect([]);
+            /*$announcements_list = Announcement::where('publish_start_date', '<', Carbon::now())
+                ->where('publish_end_date', '>', Carbon::now())
+                ->where('status', 'scheduled')
+                ->orderBy('publish_start_date', 'desc')->get();*/
+            $announcements_list = Announcement::published()->limit(12)->get(); //@todo Fix after auth implementation
+            //dd($announcements_list);
+//            $announcements_list = collect([]);
             View::share('announcements_list', $announcements_list);
         });
 

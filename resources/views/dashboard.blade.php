@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="bg-white">
+        <div class="container overflow-hidden py-2">
+            <div class="row">
+                <div class="col-lg-6">
+
+                </div>
+                <div class="col-lg-6">
+                    <x-dash.announcements-list :items="$announcements_list" />
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Promises Met -->
     <div class="bg-white py-8">
         <div class="container overflow-hidden py-3">
@@ -35,6 +47,8 @@
             <x-dash.asn-receives :asn-receives="$live_data->dashAsns" />
 
             <x-dash.inventory :inventory="$live_data->dashInventory" />
+
+            <x-dash.announcements :items="$announcements_list" />
 
         </div>
     </div>
